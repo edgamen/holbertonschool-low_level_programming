@@ -5,5 +5,6 @@ void print_z(void);
 void print_alphabet(void);
 void print_tebahpla(void);
 void print_base16(void);
+void positive_or_not(int n);
 #endif
- 
+
