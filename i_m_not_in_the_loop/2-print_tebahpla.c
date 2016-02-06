@@ -1,13 +1,13 @@
 #include "my_functions.h"
 
-void print_alphabet(void)
+void print_tebahpla(void)
 {
   /* declare variable */  
   char c;
 
-  /* print the letters of the alphabet in lowercase */
+  /* print the alphabet in lowercase and reverse order*/
   /* initialize, check and update */
-  for(c = 97; c <= 122; c++)
+  for(c = 122; c >= 97; c--)
    {
     print_char(c);
    }
