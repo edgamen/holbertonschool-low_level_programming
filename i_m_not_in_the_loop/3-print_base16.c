@@ -5,7 +5,7 @@ void print_base16(void)
   /* declare variables */
   char c;
 
-    /* print numbers of base 16 from 0-8
+    /* print numbers of base 16
     initialize, check and update
     */
   for (c = 48; c <= 70; c++)
