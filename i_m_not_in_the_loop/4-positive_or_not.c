@@ -10,13 +10,13 @@ void positive_or_not(int n)
     print_char('P');
   }
 
-  /*Print 'N' if argument is negative */
+  /* Print 'N' if argument is negative */
   if (n < 0)
   {
     print_char('N');
   }
 
-  /*Print 'Z' if argument equals 0 */
+  /* Print 'Z' if argument equals 0 */
   if (n == 0)
   {
     print_char('Z');
