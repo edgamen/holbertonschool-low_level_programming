@@ -5,7 +5,7 @@ void print_tebahpla(void)
   /* declare variable */  
   char c;
 
-  /* print the alphabet in lowercase and reverse order*/
+  /* print the alphabet in lowercase and reverse order */
   /* initialize, check and update */
   for(c = 122; c >= 97; c--)
    {
