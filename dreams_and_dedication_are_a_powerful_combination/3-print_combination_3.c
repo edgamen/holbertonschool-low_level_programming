@@ -1,6 +1,6 @@
 #include "my_functions.h"
 
-/* print all possible smallest combinations of two different digits in ascending order */
+/* print all possible smallest combinations of three different digits in ascending order */
 void print_combination_3(void)
 {
   int first_digit = 0;
