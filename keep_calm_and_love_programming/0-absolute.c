@@ -9,14 +9,3 @@ int absolute(int n) {
     return (n);
   }
 }
-
-char uppercase(char c) {
-  char conv = 'a' - 'A';
-
-  if (c >= 'a' && c <= 'z') {
-    return (c - conv);
-  }
-  else {
-    return (c);
-  }
-}
