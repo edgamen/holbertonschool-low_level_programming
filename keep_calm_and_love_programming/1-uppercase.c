@@ -1,3 +1,4 @@
+/* convert letters to upper case if possible */
 char uppercase(char c) {
   char conv = 'a' - 'A';
 
