@@ -3,6 +3,7 @@ void print_stars(int stars);
 void print_spaces(int spaces);
 void print_triangles (int h);
 
+/* prints n triangles of height h */
 void triangles_in_the_term(int h, int n)
 {
   if (n > 0 && h > 0)
@@ -13,7 +14,8 @@ void triangles_in_the_term(int h, int n)
 	}
     }
 }
- 
+
+/* print a triangle of height h */
 void print_triangles(int h)
 {
  int row, stars, spaces;
@@ -27,7 +29,8 @@ void print_triangles(int h)
      printf("%c", '\n');
    }
  }
- 
+
+/* print the stars of the triangles */
 void print_stars(int stars)
 {
   for (; stars > 0; stars --)
@@ -36,6 +39,7 @@ void print_stars(int stars)
     }
 }
 
+/* print the spaces to make the triangle isoceles */
 void print_spaces(int spaces)
 {
   for (; spaces > 0; spaces --)
