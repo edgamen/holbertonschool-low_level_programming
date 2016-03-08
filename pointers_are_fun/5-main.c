@@ -27,5 +27,7 @@ int main(void)
   printf("%d\n", n);
   n = string_to_integer("---++++ - Sui - te -  402 #cisfun :)");
   printf("%d\n", n);
+  n = string_to_integer("test");
+  printf("%d\n", n);
   return (0);
 }
