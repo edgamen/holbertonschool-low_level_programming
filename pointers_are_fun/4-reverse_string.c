@@ -5,17 +5,17 @@ int str_len(char *str);
 /* reverses a string */
 void reverse_string(char *str)
 {
-  int n;
+  int n, original_value;
   int len = str_len(str);
-  int original_value;
+  int reverse_index = len;
   
   printf("length = %i\n", len);
  
-  for (n = 0; n <= len / 2; n++, len--) 
+  for (n = 0; n <= len / 2; n++, reverse_index--) 
     {
       original_value = str[n];
-      str[n] = str[len];
-      str[len] = original_value;
+      str[n] = str[reverse_index];   
+      str[reverse_index] = original_value;
     } 
 }
 
