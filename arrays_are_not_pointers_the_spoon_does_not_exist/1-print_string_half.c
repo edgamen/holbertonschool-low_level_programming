@@ -1,9 +1,7 @@
-#include <stdio.h> /* remove later */
-
 void print_char(int n);
 int find_length(char *str);
 
-/* print one character out of 2 in a string */
+/* print second half of a string, or one less than half the number of char in a string if the total number of chars is odd */
 void print_string_half(char *str)
 {
   int n;

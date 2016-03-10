@@ -6,7 +6,7 @@ int main(void)
 
   str = "0123456789\n";
   print_string_half(str);
-  str = "0123456789f\n";
+  str = "0123456789\n";
   print_string_half(str);
    return (0);
 }
