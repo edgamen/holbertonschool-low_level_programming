@@ -2,13 +2,13 @@
 int find_end(const char *str);
 
 /* Copies a string, including the null-terminating byte */
-char *string_copy(char *dest, const char *src)
+char *string_ncopy(char *dest, const char *src, int n)
 {
-  int i;
+  int dest_index, src_index;
    
-  for (i = 0; i <= find_end(src) + 1; i++)
+  for (dest_index = 0, src_index = 0; src_index <= find_end(src) + 1; src_index++, dest_index++)
     {
-      dest[i] = src[i];
+      dest[dest_index] = src[src_index];
     }
      
   return(dest);
