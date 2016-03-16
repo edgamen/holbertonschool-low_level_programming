@@ -1,14 +1,27 @@
-#include <stdio.h>
 int find_end(const char *str);
 
 /* Copies a string, including the null-terminating byte */
 char *string_ncopy(char *dest, const char *src, int n)
 {
-  int dest_index, src_index;
+  int i;
    
-  for (dest_index = 0, src_index = 0; src_index <= find_end(src) + 1; src_index++, dest_index++)
+  if (find_end(src) < n)
     {
-      dest[dest_index] = src[src_index];
+      for (i = 0; src[i] !='\0'; i++)
+	{
+	  dest[i] = src[i];
+	}
+      for (i = find_end(src); i < n; i++)
+	{
+	  dest[i] = '\0';
+	}
+    }
+  else
+    {
+      for (i = 0; i < n; i++)
+	{
+	  dest[i] = src[i];
+	}
     }
      
   return(dest);
