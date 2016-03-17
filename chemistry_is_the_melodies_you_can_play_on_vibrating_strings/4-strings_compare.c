@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-/* Copies a string, including the null-terminating byte */
+/* Retunrs a negative int if s1 is less than s2, positive int if s1 is greater, and 0 if the two strings are equal. */
 int strings_compare(char *s1, const char *s2)
 {
   int i;
