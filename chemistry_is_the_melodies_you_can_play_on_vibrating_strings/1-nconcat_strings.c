@@ -1,4 +1,3 @@
-#include <stdio.h>
 int find_end(const char *str);
 
 /* Concatenates two strings. Will use at most n bytes from src. Size of dest must be at least the size of n + 1 (for null-terminating byte). */
@@ -22,7 +21,7 @@ char *nconcat_strings(char *dest, const char *src, int n)
 
 }
 
-/* returns index of array that is terminating null byte '\0' */
+/* returns index of array that is before terminating null byte '\0' */
 int find_end(const char *str)
 {
   int i;
