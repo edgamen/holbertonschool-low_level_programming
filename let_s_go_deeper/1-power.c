@@ -1,3 +1,4 @@
+/* return the value of x raised to power of y */
 int power(int x,  int y)
 {
   if (y < 0 || x < 0)
