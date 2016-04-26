@@ -1,5 +1,4 @@
 #include "my_functions.h"
-#include <limits.h>
 
 /* prints P if arg is +, N if -, and Z if it is 0;
    takes an int */
