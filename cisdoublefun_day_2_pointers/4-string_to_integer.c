@@ -1,19 +1,12 @@
-#include <unistd.h>
-#include <stdio.h>
 #include <limits.h>
-
-int print_char(char c)
-{
-  return (write(1, &c, 1));
-}
 
 int string_to_integer(char *s)
 {
   int i;
   int number;
   int first_number;      /* indicates this is the first number in string */
-  int sign_factor;       /* track the sign of the number */ 
-
+  int sign_factor;       /* track the sign of the number */
+  
   first_number = 1;      /* set to true */
   sign_factor = 1;       /* set initial value to positive */ 
   i = 0;
@@ -26,11 +19,19 @@ int string_to_integer(char *s)
 	  /* only add digit to number if this is still the first number */
 	  if (first_number == 1)
 	    {
+	      /* check first for potential integer overflow before adding digits */
 	      if (number > (INT_MAX) / 10 || (number == INT_MAX / 10 && (s[i] - '0') > 7))
 		{
-		  printf("Error! INT_MAX = %d, number = %d, INT_MAX/10 = %d, s[i] = %d\n", INT_MAX, number, INT_MAX/10, s[i] - '0');
-		  return (0);
+		  if (number == INT_MAX / 10 && (s[i] - '0') == 8 && sign_factor == -1)
+		    {
+		      return INT_MIN;
+		    }
+		  else
+		    {
+		      return (0);
+		    }
 		}
+	      
 	      number = number * 10 + (s[i] - '0');
 
 	      /* if the next char is not a number, the first number is finished */
@@ -46,7 +47,7 @@ int string_to_integer(char *s)
 	  sign_factor = sign_factor * (-1);
 	}
 
-        printf("current number is: %d\n", number * sign_factor);
+        /* printf("current number is: %d\n", number * sign_factor); */
 	i ++;
     }
 
