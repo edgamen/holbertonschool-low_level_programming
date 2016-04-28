@@ -1,5 +1,7 @@
 #include <limits.h>
 
+/* a function that returns the first number contained in the string
+   must take into account all - and + signs before the number */
 int string_to_integer(char *s)
 {
   int i;
