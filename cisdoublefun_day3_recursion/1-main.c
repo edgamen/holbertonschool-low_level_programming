@@ -15,5 +15,7 @@ int main(void)
   printf("%d\n", r);
   r = factorial(111111);
   printf("%d\n", r);
+  r = factorial(26);
+  printf("%d\n", r);
   return (0);
 }
