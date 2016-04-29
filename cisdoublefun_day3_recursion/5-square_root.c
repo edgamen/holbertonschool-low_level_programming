@@ -13,10 +13,12 @@ int square_root(int n)
     {
       return (n);
     }
-  
+
+  /* else check for square roots: */
   return check_for_square_root(n/2, n);
 }
 
+/* recursive function to check if n has a square root */
 int check_for_square_root(int x, int n)
 {
   if (x == 0)
