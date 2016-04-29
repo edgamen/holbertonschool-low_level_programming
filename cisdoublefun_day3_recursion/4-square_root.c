@@ -14,7 +14,7 @@ int square_root(int n)
       return (1);
     }
   
-  while (i < n)
+  while (i <= n / 2)
     {
       /* used to debug what happens when operation causes int overflow */
       /* printf("i * i = %d, INT_MAX = %d\n", i * i, INT_MAX); */
