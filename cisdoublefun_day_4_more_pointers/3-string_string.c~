@@ -1,0 +1,4 @@
+/* finds a substring in another string */
+string_string(const char *haystack, const char *needle)
+{
+}
