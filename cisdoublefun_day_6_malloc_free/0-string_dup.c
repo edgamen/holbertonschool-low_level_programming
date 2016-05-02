@@ -8,6 +8,13 @@ char *string_dup(char *str)
   int i;
 
   dupstring = malloc(sizeof(*str));
+
+  /* if malloc fails */
+  if (dupstring == NULL)
+    {
+      return NULL;
+    }
+  
   i = 0;
 
   while (str[i] != '\0')
