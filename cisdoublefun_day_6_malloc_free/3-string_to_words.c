@@ -45,6 +45,7 @@ char **string_to_words(char *s)
   return array_of_strings;	 
 }
 
+/* frees allocated memory in case function fails */
 void free_memory(char** array_of_strings, int n)
 {
   int i;
