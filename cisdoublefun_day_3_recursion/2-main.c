@@ -5,7 +5,11 @@ int main(void)
 {
   int r;
 
-  r = power(1, 10);
+  r = power(3, 0);
+  printf("%d\n", r);
+  r = power(1, 5);
+  printf("%d\n", r);
+  r = power(0, 5);
   printf("%d\n", r);
   r = power(1024, 0);
   printf("%d\n", r);

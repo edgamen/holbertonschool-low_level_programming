@@ -8,9 +8,13 @@ int power(int x, int y)
     {
       return (1);
     }
-  if (y < 0 || x < 1)
+  if (y < 0 || x < 0)
     {
       return (-1);
+    }
+  if (x == 0)
+    {
+      return (0);
     }
   /* in case next step in recursion would cause int overflow */
   if (x > INT_MAX / power(x, y - 1))

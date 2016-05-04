@@ -7,7 +7,7 @@ int power(int x, int y)
 
   result = 1;
   
-  if (y < 0 || x < 1)
+  if (y < 0 || x < 0)
     {
       return (-1);
     }
@@ -19,7 +19,7 @@ int power(int x, int y)
   while (y > 0)
     {
       /* detect if operation would cause int overflow */
-      if (result > INT_MAX / x)
+      if (x != 0 && result > INT_MAX / x)
 	{
 	  return (-1);
 	}
