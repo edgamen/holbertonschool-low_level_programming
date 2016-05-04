@@ -17,6 +17,6 @@ $(TARGET) : $(OBJECTS)
 #	$(CC) $(CFLAGS) $< -o $@
 
 clean :
-	rm $(OBJECTS) $(TARGET)
+	rm $(OBJECTS)
 
 re : clean all
