@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include "str_struct.h"
 
 void print_string(char *str);
 void print_number(int n);
@@ -11,11 +12,6 @@ int print_char(char c)
 {
   return (write(1, &c, 1));
 }
-
-struct String {
-  char *str;
-  int length;
-};
 
 /* prints the content of a struct String */
 void print_string_struct(struct String *str)

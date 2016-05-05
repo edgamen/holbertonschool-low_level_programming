@@ -1,12 +1,8 @@
 #include <stdlib.h>
+#include "str_struct.h"
 
 int stringlen(char *str);
 char *strcopy(char *dest, char *src);
-
-struct String {
-  char *str;
-  int length;
-};
 
 /* function that returns a pointer to a String struct */
 struct String *string_to_struct(char *str)
