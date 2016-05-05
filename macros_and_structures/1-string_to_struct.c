@@ -3,21 +3,10 @@
 int stringlen(char *str);
 char *strcopy(char *dest, char *src);
 
-/* struct String
-{
+struct String {
   char *str;
   int length;
-  }; */
-
-/* used to debug string_to_struct function */
-/* int main(void)
- * {
- *  char *str = "123456";
- *  string_to_struct(str);
- *  return (0);
- * } 
-*/
-
+};
 
 /* function that returns a pointer to a String struct */
 struct String *string_to_struct(char *str)
@@ -47,6 +36,9 @@ struct String *string_to_struct(char *str)
   string_struct->str = copy_of_string;
   /* printf("string_struct string: %s, address = %p\n", string_struct->str, string_struct->str); */
 
+  /* also copy the length of the string into the struct */
+  string_struct->length = --string_length;
+  
   return string_struct;
 }
 
