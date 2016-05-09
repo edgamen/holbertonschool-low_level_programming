@@ -23,9 +23,9 @@ int insert_in_list(List **list, char *content, int index)
     }
   if (index == 0)
     {
-      /* add a node at the beginning of the list */
-      add_node(list, content);
-      return (0);
+      /* add a node at the beginning of the list
+         and return whether it was successful or not */
+      return add_node(list, content);
     }
   
   preceding_node = *list;
@@ -39,7 +39,8 @@ int insert_in_list(List **list, char *content, int index)
      just add a node  at the end of the list */
   if (preceding_node->next == NULL)
     {
-      append_node(list, content);
+      /* return whether it was successful or not */
+      return append_node(list, content);
     }
   
   else
