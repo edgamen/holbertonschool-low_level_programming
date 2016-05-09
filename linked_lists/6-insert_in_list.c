@@ -19,43 +19,42 @@ int insert_in_list(List **list, char *content, int index)
   /* if the index is not valid, do nothing and ret 0 */
   if (index < 0)
     {
-      return 0;
+      return (0);
     }
   if (index == 0)
     {
       /* add a node at the beginning of the list */
       add_node(list, content);
+      return (0);
     }
-  /* could maybe do something else with this 
-  if (index > list_size(*list))
+  
+  preceding_node = *list;
+  /* find node that should precede the new node */
+  for (i = 1; i < index && preceding_node->next != NULL; i++)
     {
-      add the node at the end of the list 
-      append_node(list, content); 
-      } */
+      preceding_node = preceding_node->next;
+    }
+
+  /* if the index is greater than the list size: 
+     just add a node  at the end of the list */
+  if (preceding_node->next == NULL)
+    {
+      append_node(list, content);
+    }
+  
   else
     {
       new_node = create_new_node(content);
+
+      /* if allocating space for a new node and its contents 
+	 was unsuccessful: */
       if (new_node == NULL)
 	{
 	  return (1);
 	}
 
-      preceding_node = *list;
-      /* find node that should precede the new node */
-      for (i = 1; i < index && preceding_node->next != NULL; i++)
-	{
-	  preceding_node = preceding_node->next;
-	}
-
-      if (preceding_node->next == NULL)
-	{
-	  append_node(list, content);
-	}
-      else
-	{
-	new_node->next = preceding_node->next;
-	preceding_node->next = new_node;
-	}
+      new_node->next = preceding_node->next;
+      preceding_node->next = new_node;
     }
 
   return (0);

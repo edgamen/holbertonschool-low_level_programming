@@ -15,6 +15,9 @@ int main(void)
   print_list(list);
   if (add_node(&list, "CA 94111") == 1)
     return (1);
+  if (insert_in_list(&list, "Meep", 0) == 1)
+    return (1);
+    print_list(list);
   print_list(list);
   if (insert_in_list(&list, "98 Battery St.", 1) == 1)
     return (1);
