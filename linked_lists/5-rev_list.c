@@ -9,6 +9,10 @@ void rev_list(List **list)
   List *previous_node;
 
   current_node = *list;
+  if (current_node == NULL)
+    {
+      return;
+    }
   next_node = current_node->next;
   current_node->next = NULL;
   
