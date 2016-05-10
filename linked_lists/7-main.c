@@ -21,5 +21,13 @@ int main(void)
   print_list(list);
   remove_from_list(&list, 1);
   print_list(list);
+
+  /* test where index = 0 */
+  remove_from_list(&list, 0);
+  print_list(list);
+
+  /* test where index > length of list */
+  remove_from_list(&list, 10);
+  print_list(list);
   return (0);
-}
+} 
