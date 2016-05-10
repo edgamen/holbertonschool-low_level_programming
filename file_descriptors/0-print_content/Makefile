@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -I$(INCLUDES)
+CFLAGS = -Wall -Werror -Wextra -pedantic -I$(INCLUDES)
 VPATH = ./src/
 INCLUDES = ./inc/
 SOURCES = print_char.c print_string.c 0-print_content.c
