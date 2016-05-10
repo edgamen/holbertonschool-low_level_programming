@@ -9,6 +9,4 @@ void print_string(char *str)
     {
       print_char(str[n]);
     }
-
-  print_char('\n');
 }
