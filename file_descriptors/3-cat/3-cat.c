@@ -3,13 +3,13 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "my_functions.h"
-#define BUFFSIZE 100
 
 /* a program that replicates the behavior of cat */
 int main(int ac, char** av)
 {
   char *filepath;
   int is_dir;
+  int i;
   
   /* start by checking the number of arguments */
   if (ac < 2)
@@ -20,22 +20,19 @@ int main(int ac, char** av)
       print_char('\n');
     }
 
-  /* later, we will want to loop through av to do this for each argument */
-
-  filepath = av[1]; /* for now we set this to the first argument*/
-
-  if ( (is_dir = check_if_dir(filepath)) == -1 )
+  /* for each of the arguments provided: */
+  for (i = 1; i < ac; i++)
     {
-      /* some error occurred, so exit the program */
-      return (1);
-    }
-  if (!is_dir)
-    {
-      /* read the file and write it out on the stdout */
-      if (print_file(filepath) == -1)
+      filepath = av[i];
+
+      /* check first if the file is a directory or does not exist */
+      is_dir = check_if_dir(filepath);
+
+      /* if it is not a directory, print the file */
+      if (!is_dir)
 	{
-	  /* some error occurred, so exit the program */
-	  return (1);
+	  if (print_file(filepath) == -1)
+	      return (1);
 	}
     }
   
