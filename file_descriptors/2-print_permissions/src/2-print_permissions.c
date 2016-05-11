@@ -23,7 +23,7 @@ int main(int ac, char** av)
   if (lstat(FILEPATH, &filestat) == -1)
     {
       perror("lstat");
-      return 1;
+      return (1);
     }
 
   if (S_ISDIR(filestat.st_mode))
