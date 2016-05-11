@@ -10,6 +10,9 @@ int main(int ac, char** av)
   char *filepath;
   int is_dir;
   int i;
+  int ret_value;
+
+  ret_value = 0;
   
   /* start by checking the number of arguments */
   if (ac < 2)
@@ -26,17 +29,22 @@ int main(int ac, char** av)
       filepath = av[i];
 
       /* check first if the file is a directory or does not exist */
-      is_dir = check_if_dir(filepath);
-
+      if ( (is_dir = check_if_dir(filepath)) == -1 )
+	{
+	  /* if there was an error, we don't want to return
+	     yet but we do want to indicate there was an err */
+	  ret_value = 1;
+	}
+      
       /* if it is not a directory, print the file */
       if (!is_dir)
 	{
 	  if (print_file(filepath) == -1)
-	      return (1);
+	    ret_value = 1;
 	}
     }
   
-  return (0);
+  return (ret_value);
 }
 
 /* a function to test if a file is a directory. 
