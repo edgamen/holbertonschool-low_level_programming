@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "my_functions.h"
+#define BUFFER_SIZE 10
 
 /* a program that replicates the behavior of cat */
 int main(int ac, char** av)
@@ -11,16 +12,23 @@ int main(int ac, char** av)
   int is_dir;
   int i;
   int ret_value;
+  int bytes_read;
 
   ret_value = 0;
   
-  /* start by checking the number of arguments */
-  if (ac < 2)
+  /* start by checking the number of arguments:
+     if it's empty or if a - is provided, print stdin
+     to stdout */
+  if (ac < 2 || av[1][0] == '-')
     {
-      /* for now: later we must alter to read stdin most likely */
-      print_string("Please provide a file name.\n");
-      print_string(av[0]);
-      print_char('\n');
+      do {
+	bytes_read =  read_entire_file(1, "3-cat");
+	if (bytes_read == -1)
+	  {
+	    return (1);
+	  }
+      } while (bytes_read != 0);
+      /* while EOF has not been reached */
     }
 
   /* for each of the arguments provided: */

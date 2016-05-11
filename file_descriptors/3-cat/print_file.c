@@ -6,12 +6,10 @@
 #include "my_functions.h"
 #define BUFF_SIZE 100
 
-/* A program that prints the contents of a file on the stdout */
+/* A function that prints the contents of a file on the stdout */
 int print_file(char *filepath)
 {
   int fd;   /* a file descriptor */
-  int bytes_read;  /* amount of bytes read() succeeded in reading */
-  char buffer[BUFF_SIZE + 1];
   
   /* open the file first */
   fd = open(filepath, O_RDONLY);
@@ -24,6 +22,23 @@ int print_file(char *filepath)
       return (-1);
     }
 
+  if (read_entire_file(fd, filepath) == -1)
+  {
+    return (-1);
+  }
+  /* close the file */
+  close(fd);
+
+  return (1);
+}
+
+/* Prints an entire file to stdout */
+int read_entire_file(int fd, char *err_msg)
+{
+
+  int bytes_read;  /* amount of bytes read() succeeded in reading */
+  char buffer[BUFF_SIZE + 1];
+
   /* read a BUFF_SIZE once and continue reading until 
      bytes_read is less than BUFF_SIZE, which will 
      indicate the entire file has been read */
@@ -32,7 +47,7 @@ int print_file(char *filepath)
     if (bytes_read == -1)
       {
 	print_string("cat-3: ");
-	perror("filepath");
+	perror(err_msg);
 	close(fd);
 	return (-1);
       }
@@ -40,8 +55,5 @@ int print_file(char *filepath)
     print_string(buffer);
   } while (bytes_read == BUFF_SIZE);
 
-  /* close the file */
-  close(fd);
-
-  return (1);
+  return bytes_read;
 }
