@@ -8,83 +8,76 @@
 #include <stdio.h>
 
 /* A simple UNIX command interpreter (shell) */
+/* this will be longer than the previous version but maybe simpler */
 int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __attribute__((unused))char **env)
 {
   char *input;
   char **exec_argv;
   int status;
-  int parse_res;
 
-  input = NULL;
-  exec_argv = NULL;
-  status = 0;
-  parse_res = 1;
-  
-  while (parse_res != 0) {
-      print_prompt(PROMPT);
-      parse_res = parse_input(input, exec_argv, env, status);
+  while (1) { 
 
-      /* if there is a critical issue reading input
-	 or if child process has not ended
-	 because the program to execute could not
-         be found */
-      if (parse_res < 0) {	
-	return (1);
-      }
-  }
-  
-  return (0);
-}
+    print_prompt(PROMPT);
+    input = read_line(0); 
 
-/* Function: read from stdin and execute a built-in
-   function or call a child process accordingly */
-int parse_input(char *input, char **exec_argv, char **env, int status)
-{
-  input = read_line(0); /* read a line from stdin */
-
-  /* if there was some error allocating the string */
-  if (input == NULL) {
-      /* hopefully the read_line function prints an 
-	 appropriate error message */
+    /*if (input[0] == NULL)
+      {
+	printf("input is null");
+	} */ /*look into this later */
+    
+    /* if there was some error allocating the string */
+    if (input == NULL) {
       print_string("Failed to read input. Exiting shell.\n");
-      return (-1);
+      return (1);
     }
-  exec_argv = string_split(input, ' ');
-  /* if there was some error allocating the array */
-  if (exec_argv == NULL) {
-      /* hopefully the string_split function prints an 
-	 appropriate error message */
+    exec_argv = string_split(input, ' ');
+    
+    /* if there was some error allocating the array */
+    if (exec_argv == NULL) {
       print_string("Ran out of memory. Exiting shell.\n");
       free(input);
-      return (-1);
+      return (2);
     }
-  
-  /* detect built-in functions */
-  if (string_compare(exec_argv[0], "exit")) {
+
+    /* if empty input is provided by pressing enter */
+    if (exec_argv[0] == NULL)
+      {
+	free(input);
+	free_str_array(exec_argv);
+	continue;
+      }
+    
+    /* detect built-in functions */
+    if (string_compare(exec_argv[0], "exit")) {
       print_string("Need to exit.\n");
       free_str_array(exec_argv);
       free(input);
       return (0);
     }
-  else if (string_compare(exec_argv[0], "env")) {
+    else if (string_compare(exec_argv[0], "env")) {
       print_string("Need to print env variables.\n");
     }
-  else {
-    status = call_child(exec_argv, env);
-    if (status < 0) {
-      free(input);
-      free_str_array(exec_argv);
-      return (-2);
+    else { 
+      /* is there a way to store the value in status 
+	 in the env var "$?"? */
+      status = call_child(exec_argv, env);
+      
+      /* means exec could not find the program provided
+	 and returned to the child process */
+      if (status < -1) {
+	free(input);
+	free_str_array(exec_argv);
+	return (-2);
+	} 
     }
-    /* is there a way to store the value in status 
-       in the env var "$?"? */
+    
+    free(input);
+    free_str_array(exec_argv);
+   
+      /* END WHILE LOOP */
   }
-
-  free(input);
-  free_str_array(exec_argv);
-
-  return (1);
-
+  
+  return (0);
 }
 
 /* Function: execute a program passed as an argument 
