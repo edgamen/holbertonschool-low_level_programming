@@ -13,25 +13,50 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
   char *input;
   char **exec_argv;
   int status;
+  int parse_res;
+
+  input = NULL;
+  exec_argv = NULL;
+  status = 0;
+  parse_res = 1;
   
-  print_prompt(PROMPT);
+  while (parse_res != 0) {
+      print_prompt(PROMPT);
+      parse_res = parse_input(input, exec_argv, env, status);
+
+      /* if there is a critical issue reading input
+	 or if child process has not ended
+	 because the program to execute could not
+         be found */
+      if (parse_res < 0) {	
+	return (1);
+      }
+  }
+  
+  return (0);
+}
+
+/* Function: read from stdin and execute a built-in
+   function or call a child process accordingly */
+int parse_input(char *input, char **exec_argv, char **env, int status)
+{
   input = read_line(0); /* read a line from stdin */
 
   /* if there was some error allocating the string */
   if (input == NULL) {
       /* hopefully the read_line function prints an 
 	 appropriate error message */
-      print_string("input: Exiting program.\n");
-      return (1);
+      print_string("Failed to read input. Exiting shell.\n");
+      return (-1);
     }
   exec_argv = string_split(input, ' ');
   /* if there was some error allocating the array */
   if (exec_argv == NULL) {
       /* hopefully the string_split function prints an 
 	 appropriate error message */
-      print_string("exec_argv: Exiting program.\n");
+      print_string("Ran out of memory. Exiting shell.\n");
       free(input);
-      return (1);
+      return (-1);
     }
   
   /* detect built-in functions */
@@ -43,25 +68,23 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     }
   else if (string_compare(exec_argv[0], "env")) {
       print_string("Need to print env variables.\n");
-      return (0);
     }
   else {
     status = call_child(exec_argv, env);
-    printf("status of child: %d\n", status);
+    if (status < 0) {
+      free(input);
+      free_str_array(exec_argv);
+      return (-2);
+    }
     /* is there a way to store the value in status 
        in the env var "$?"? */
   }
 
-  
-  /* debugging statements 
-  printf("%s", exec_argv[0]);
-  printf("%s", exec_argv[1]);*/
-
-  /* at the end, we must free all malloc'd items */
-  free_str_array(exec_argv);
   free(input);
-  
-  return (0);
+  free_str_array(exec_argv);
+
+  return (1);
+
 }
 
 /* Function: execute a program passed as an argument 
@@ -77,10 +100,14 @@ int call_child(char **exec_argv, char **env)
   }
   if (pid == 0) {
     execve(exec_argv[0], exec_argv, env);
+    perror(exec_argv[0]);
+    return (-2);
   }
-
-  wait(&status);
-  return status;
+  else {
+    wait(&status);
+  }
+  
+   return status;
 }
 
 /* Function: print a prompt */

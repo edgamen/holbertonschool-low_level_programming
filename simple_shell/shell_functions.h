@@ -4,3 +4,4 @@ void print_prompt(char *s);
 int string_compare(char *s1, char *s2);
 void free_str_array(char **str_array);
 int call_child(char **exec_argv, char **env);
+int parse_input(char *input, char **exec_argv, char **env, int status);
