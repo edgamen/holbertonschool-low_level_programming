@@ -11,74 +11,61 @@ int output;          /* the single-digit number to print */
 /* takes an integer in parameter and prints it */
 void print_number(int n)
 {
-  int min = 0;
+	int min = 0;
 
-  if (n < 0)
-    {
-      /* take care of INT_MIN scenario */
-      if (n == -2147483648)
-	{
-	  n = -214748364;
-	  min = 1;
+	if (n < 0) {
+		/* take care of INT_MIN scenario */
+		if (n == -2147483648) {
+			n = -214748364;
+			min = 1;
+		}
+		n = n * -1;
+		print_char('-');
 	}
-      n = n * -1;
-      print_char('-');
-    }
 
-  digits = get_digits(n);
-  digitRetainer = digits;
-  ten_power = get_power();
+	digits = get_digits(n);
+	digitRetainer = digits;
+	ten_power = get_power();
 
-  if (n == 0)
-    {
-      print_char('0');
-    }
-  else
-    {
-      print_digits(n);
+	if (n == 0) {
+		print_char('0');
+	} else {
+		print_digits(n);
 
-      if (min == 1) {
-	print_char(8 + '0');
-      }
-    }
+		if (min == 1) {
+			print_char(8 + '0');
+		}
+	}
 }
 
 /* find and return the number of digits in the number n */
 int get_digits(int n)
 {
+	for (digits = 0; n > 0; digits ++)
+		n = n / 10;
 
-  for (digits = 0; n > 0; digits ++)
-    {
-      n = n / 10;
-    }
-
-  return (digits);
+	return (digits);
 
 }
 
 /* get the power of the number by multiplying 10 for each non-initial digit */
 int get_power(void)
 {
+	for (ten_power = 1; digits > 1; digits --)
+		ten_power = ten_power * 10;
 
-  for (ten_power = 1; digits > 1; digits --)
-    {
-      ten_power = ten_power * 10;
-    }
-
-  return (ten_power);
+	return (ten_power);
 }
 
 /* computer and print value of each digit */
 void print_digits(int n)
 {
-  int output;
+	int output;
 
-  for (; digitRetainer > 0; digitRetainer --)
-    {
-      output = n / (ten_power);
-      print_char(output + '0');
-      n = n - (output * ten_power);
-      ten_power = ten_power / 10;
-    }
-
-} 
+	for (; digitRetainer > 0; digitRetainer --) {
+		output = n / (ten_power);
+		print_char(output + '0');
+		n = n - (output * ten_power);
+		ten_power = ten_power / 10;
+	}
+}
