@@ -1,10 +1,10 @@
 #include "shell_functions.h"
 #include "libshell.h"
 #include <stdlib.h>
+#include <dirent.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <dirent.h>
 #define PROMPT "prompt"
 #define PATH_VAR find_path_var(env)
 #include <stdio.h>
@@ -15,8 +15,12 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
 {
   char *input;
   char **exec_argv;
+  char *found_path;
   int status;
+  int return_value;
 
+  return_value = 0;
+  
   while (1) { 
 
     print_prompt(PROMPT);
@@ -50,18 +54,23 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     
     /* detect built-in functions */
     if (string_compare(exec_argv[0], "exit")) {
-      print_string("Need to exit.\n");
+      /*set_return(&return_value, exec_argv[1]); */
       free_str_array(exec_argv);
       free(input);
-      return (0);
+      return return_value;
     }
     else if (string_compare(exec_argv[0], "env")) {
       print_array(env);
-      find_exec_path(PATH_VAR, "echo");
     }
+    
     else { 
       /* is there a way to store the value in status 
 	 in the env var "$?"? */
+      found_path = find_exec_path(PATH_VAR, exec_argv[0]); 
+      if (found_path != NULL) {
+	free(exec_argv[0]);
+	exec_argv[0] = found_path;
+      }
       status = call_child(exec_argv, env);
       
       /* means exec could not find the program provided
@@ -75,11 +84,27 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     
     free(input);
     free_str_array(exec_argv);
-   
-      /* END WHILE LOOP */
   }
   
   return (0);
+}
+
+void set_return(int *ret_value, char *s)
+{
+  int i;
+  
+  if (s != NULL) {
+    *ret_value = 0;
+    return;
+  }
+    for (i = 0; s[i] != '\0'; i++) {
+      if (s[i] < 0 || s[i] > 9) {
+	*ret_value = 0;
+	return;
+      }
+    }
+
+    *ret_value = string_to_integer(s);
 }
 
 /* Function: tries to find the path that
@@ -88,6 +113,7 @@ char *find_exec_path(char *path_var, __attribute__((unused)) char *exe)
 {
   char **paths;
   char *dirname;
+  char *temp;
   DIR *dir;
   int i;
   
@@ -102,46 +128,61 @@ char *find_exec_path(char *path_var, __attribute__((unused)) char *exe)
     return NULL;
   }
   
-  /*print_array(paths);*/
+  /* debugging: print_array(paths); */
 
-  /* for (i = 0; paths[i] != NULL; i++)
-     { */
+  for (i = 0; paths[i] != NULL; i++)
+    { 
       dirname = paths[i];
       dir = opendir(dirname);
       if (dir == NULL) {
-	print_string("opendir: ");
-	perror(dirname);
+	perror("opendir");
 	/* not sure yet if I want to return
 	   instead of continue through loop:
 	   free_str_array(paths);
 	   return NULL; */
       }
-      /* search the entries in said dir to see if any are 'echo */
-      search_dir(dir, exe);
-      if (closedir(dir) == -1) {
-	print_string("closedir: ");	
-	perror(dir);
+      if (search_dir(dir, exe) == 1) {
+	/* add clauses to deal if malloc fails: */
+	temp = string_concat(paths[i], "/");
+	dirname = string_concat(temp, exe);
+	free(temp);
+	free_str_array(paths);
+	if (closedir(dir) == -1) {
+	    perror("closedir");
+	  }
+	return dirname;
       }
-      /* } */
+      if (closedir(dir) == -1) {
+	perror("closedir");
+      }
+     }
   
   free_str_array(paths);
   
   return NULL;
 }
 
-char *search_dir(DIR *dir, char *exe)
+int search_dir(DIR *dir, char *exe)
 {
   struct dirent *dirstruct;
 
-  do {
-    dirstruct = readdir(dir);
-    /* if (dirstruct->name == exe) {
-      printf("%s", dirstruct->name);
-      }*/
-    printf("%s\n", dirstruct->name);
-  } while (dirstruct != NULL);
+  while (1) {
+      dirstruct = readdir(dir);
+      if (dirstruct == NULL) {
+	/* consider checking errno to determine if error
+	   or end of the readable directories */
+	break;
+      }
+      if (string_compare(dirstruct->d_name, exe) == 1) {
+	return 1;
+      }
 
-  return NULL;
+      /* debugging:
+	print_string(dirstruct->d_name);
+	print_char('\n'); */
+    }
+
+  return 0;
 }
 
 
