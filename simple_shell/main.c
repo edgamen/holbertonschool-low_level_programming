@@ -10,7 +10,6 @@
 #include <stdio.h>
 
 /* A simple UNIX command interpreter (shell) */
-/* this will be longer than the previous version but maybe simpler */
 int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __attribute__((unused))char **env)
 {
   char *input;
@@ -19,6 +18,7 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
   int status;
   int return_value;
 
+  status = 0;
   return_value = 0;
   
   while (1) { 
@@ -54,13 +54,17 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     
     /* detect built-in functions */
     if (string_compare(exec_argv[0], "exit")) {
-      /*set_return(&return_value, exec_argv[1]); */
+      set_return(&return_value, exec_argv[1]); 
       free_str_array(exec_argv);
       free(input);
       return return_value;
     }
     else if (string_compare(exec_argv[0], "env")) {
       print_array(env);
+    }
+    else if (string_compare(exec_argv[0], "$?")) {
+      print_number(status);
+      print_char('\n');
     }
     
     else { 
@@ -72,7 +76,6 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
 	exec_argv[0] = found_path;
       }
       status = call_child(exec_argv, env);
-      
       /* means exec could not find the program provided
 	 and returned to the child process */
       if (status < -1) {
@@ -86,25 +89,26 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     free_str_array(exec_argv);
   }
   
-  return (0);
+  return 0;
 }
 
+/* Function: sets the return value of the program */
 void set_return(int *ret_value, char *s)
 {
   int i;
   
-  if (s != NULL) {
+  if (s == NULL) {
     *ret_value = 0;
     return;
   }
-    for (i = 0; s[i] != '\0'; i++) {
-      if (s[i] < 0 || s[i] > 9) {
-	*ret_value = 0;
-	return;
-      }
+  for (i = 0; s[i] != '\0'; i++) {
+    if (s[i] < '0' || s[i] > '9') {
+      *ret_value = 0;
+      return;
     }
-
-    *ret_value = string_to_integer(s);
+  }
+  
+  *ret_value = string_to_integer(s);
 }
 
 /* Function: tries to find the path that
