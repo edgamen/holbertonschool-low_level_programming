@@ -5,12 +5,12 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <stdio.h>
 #define PROMPT "prompt"
 #define PATH_VAR find_path_var(env)
-#include <stdio.h>
 
 /* A simple UNIX command interpreter (shell) */
-int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __attribute__((unused))char **env)
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char **env)
 {
   char *input;
   char **exec_argv;
@@ -26,11 +26,6 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     print_prompt(PROMPT);
     input = read_line(0); 
 
-    /* if (input[0] == '\n')
-      {
-	print_string("input is null");
-      } look into this later */
-    
     /* if there was some error allocating the string */
     if (input == NULL) {
       print_string("Failed to read input. Exiting shell.\n");
@@ -68,8 +63,6 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
     }
     
     else { 
-      /* is there a way to store the value in status 
-	 in the env var "$?"? */
       found_path = find_exec_path(PATH_VAR, exec_argv[0]); 
       if (found_path != NULL) {
 	free(exec_argv[0]);
@@ -82,7 +75,7 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, __at
 	free(input);
 	free_str_array(exec_argv);
 	return (-2);
-	} 
+      } 
     }
     
     free(input);
@@ -131,8 +124,6 @@ char *find_exec_path(char *path_var, __attribute__((unused)) char *exe)
     print_string ("Error: ran out of memory to allocate an array.");
     return NULL;
   }
-  
-  /* debugging: print_array(paths); */
 
   for (i = 0; paths[i] != NULL; i++)
     { 
@@ -181,9 +172,6 @@ int search_dir(DIR *dir, char *exe)
 	return 1;
       }
 
-      /* debugging:
-	print_string(dirstruct->d_name);
-	print_char('\n'); */
     }
 
   return 0;
