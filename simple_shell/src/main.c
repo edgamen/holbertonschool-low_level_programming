@@ -42,17 +42,13 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char
 
 		/* if empty input is provided by pressing enter */
 		if (exec_argv[0] == NULL) {
-			free(input);
-			free_str_array(exec_argv);
-			continue;
+			goto end_of_loop;
 		}
 
 		/* detect built-in functions */
 		if (string_compare(exec_argv[0], "exit")) {
 			set_return(&return_value, exec_argv[1]);
-			free_str_array(exec_argv);
-			free(input);
-			return return_value;
+			goto clear_memory_exit;
 		} else if (string_compare(exec_argv[0], "env")) {
 			print_array(env);
 		} else if (string_compare(exec_argv[0], "$?")) {
@@ -68,17 +64,22 @@ int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char
 			/* means exec could not find the program provided
 			   and returned to the child process */
 			if (status < -1) {
-				free(input);
-				free_str_array(exec_argv);
-				return (-2);
+				return_value = -2;
+				goto clear_memory_exit;
 			}
 		}
 
+	end_of_loop:
 		free(input);
 		free_str_array(exec_argv);
 	}
 
 	return 0;
+
+clear_memory_exit:
+	free(input);
+	free_str_array(exec_argv);
+	return return_value;
 }
 
 /* Function: sets the return value of the program */
@@ -194,7 +195,7 @@ char *find_path_var(char **env)
 	return NULL;
 }
 
-/* Function: execute a program passed as an argument 
+/* Function: execute a program passed as an argument
    in a child process */
 int call_child(char **exec_argv, char **env)
 {
