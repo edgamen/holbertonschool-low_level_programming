@@ -1,4 +1,4 @@
-#include "shell_functions.h"
+#Ainclude "shell_functions.h"
 #include "libshell.h"
 #include <stdlib.h>
 #include <dirent.h>
@@ -174,7 +174,6 @@ int search_dir(DIR *dir, char *exe)
 	return 0;
 }
 
-
 /* Function: return element in the env
    array that corresponds to $PATH */
 char *find_path_var(char **env)
@@ -236,3 +235,4 @@ void free_str_array(char **str_array)
 
 	free(str_array);
 }
+B
