@@ -235,4 +235,3 @@ void free_str_array(char **str_array)
 
 	free(str_array);
 }
-B
