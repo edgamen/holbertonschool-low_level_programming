@@ -15,9 +15,33 @@ class Person {
     }
 }
 
+enum Subject: String {
+    case Math
+    case English
+    case French
+    case History
+}
+
 class Mentor: Person {
+    let subject: Subject?
+
     func isStudent() -> Bool {
         return false
+    }
+
+    init(first_name: String, last_name: String, age: Int, subject: Subject = Subject.Math)
+    {
+        self.subject = subject
+        super.init(first_name: first_name, last_name: last_name, age: age)
+    }
+
+    func stringSubject() -> String {
+        if self.subject == nil {
+            return "Err: Subject is nil"
+        }
+        else {
+            return self.subject!.rawValue
+        }
     }
 }
 
