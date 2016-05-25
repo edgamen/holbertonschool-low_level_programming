@@ -22,7 +22,7 @@ enum Subject: String {
     case History
 }
 
-class Mentor: Person {
+class Mentor: Person, Classify {
     let subject: Subject?
 
     func isStudent() -> Bool {
@@ -45,7 +45,7 @@ class Mentor: Person {
     }
 }
 
-class Student: Person {
+class Student: Person, Classify {
     func isStudent() -> Bool {
         return true
     }
@@ -76,5 +76,41 @@ class School {
             return true
         }
         return false
+    }
+
+    func listStudents() -> [Person] {
+        var list_students = list_persons.filter({(p) -> Bool in
+            return p is Student
+        })
+
+        list_students = list_students.sort{(a, b) -> Bool in
+            return a.age > b.age
+        }
+
+        return list_students
+    }
+
+    func listMentors() -> [Person] {
+        var list_mentors = list_persons.filter({(p) -> Bool in
+            return p is Mentor
+        })
+
+        list_mentors = list_mentors.sort{(a, b) -> Bool in
+            return a.age > b.age
+        }
+
+        return list_mentors
+    }
+
+    func listMentorsBySubject(subject: Subject) -> [Person] {
+        let list_mentors = listMentors()
+
+        var list_mentors_by_subject = list_mentors as! [Mentor]
+
+        list_mentors_by_subject = list_mentors_by_subject.filter({(m) -> Bool in
+            return m.subject == subject
+        })
+
+        return list_mentors_by_subject
     }
 }
