@@ -65,4 +65,3 @@ void print_spaces(int num)
 		num --;
 	}
 }
-B
