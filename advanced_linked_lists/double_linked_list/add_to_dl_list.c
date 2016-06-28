@@ -11,9 +11,14 @@ int add_end_dl_list(List **list, char *str)
 	List *prev_node;
 	char *copied_str;
 
-	new_node = malloc(sizeof(List));
 	copied_str = strdup(str);
-	if (new_node == NULL || copied_str == NULL) {
+	if (copied_str == NULL) {
+		return (1);
+	}
+
+	new_node = malloc(sizeof(List));
+	if (new_node == NULL) {
+		free(copied_str);
 		return (1);
 	}
 
@@ -39,9 +44,14 @@ int add_begin_dl_list(List **list, char *str)
 	List *new_node;
 	char *copied_str;
 
-	new_node = malloc(sizeof(List));
 	copied_str = strdup(str);
-	if (new_node == NULL || copied_str == NULL) {
+	if (copied_str == NULL) {
+		return (1);
+	}
+
+	new_node = malloc(sizeof(List));
+	if (new_node == NULL) {
+		free(copied_str);
 		return (1);
 	}
 
