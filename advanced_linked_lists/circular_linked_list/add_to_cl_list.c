@@ -1,7 +1,6 @@
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 List *find_last_node(List **list);
 
@@ -59,7 +58,6 @@ int add_begin_cl_list(List **list, char *str)
 	new_node->str = copied_str;
 
 	if (*list == NULL) {
-		printf("list is currently null! going to try add...");
 		*list = new_node;
 		new_node->next = *list;
 	} else {
