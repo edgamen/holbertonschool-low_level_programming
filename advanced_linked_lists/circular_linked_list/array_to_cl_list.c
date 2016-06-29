@@ -3,7 +3,7 @@
 
 int add_end_cl_list(List **, char *);
 
-/* convert an array of strings to a linked list */
+/* convert an array of strings to a circular linked list */
 List *array_to_cl_list(char **array)
 {
 	List *list;
