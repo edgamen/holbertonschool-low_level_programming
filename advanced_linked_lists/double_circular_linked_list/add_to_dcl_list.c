@@ -1,7 +1,6 @@
 #include "list.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
 
 List *find_last_node(List **list);
 
