@@ -76,16 +76,6 @@ int add_node(List **head, const char *key, const char *value)
 	}
 
 	*head = new_node;
-	/* printf("address of head is now %p\n", (void*)*head); */
-
-	/* printf("adding new node %p, with key %s and value %s\n", \
-	   (void *)new_node, new_node->key, new_node->value); 
-	if (new_node->next == NULL) {
-		printf("new node next is NULL\n");
-	} else {
-		printf("new node next is %p with key %s and value %s\n", \
-		(void *)new_node->next, (new_node->next)->key, (new_node->next)->value);
-	} */
 	return 0;
 }
 
