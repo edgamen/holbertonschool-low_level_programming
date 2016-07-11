@@ -21,12 +21,15 @@ int ht_put(HashTable *hashtable, const char *key, const char *value)
 	     current_node != NULL; \
 	     current_node = current_node->next) {
 		/* printf("current node %p is not null\n", (void *)current_node);
-		   printf("current node key is %s and value is %s\n", current_node->key, current_node->value); */
+		   printf("current node key is %s and value is %s\n", \
+		   current_node->key, current_node->value); */
 
 		if (is_identical(current_node->key, key)) {
 			/* printf("key %s is already used\n", key); */
+			free(current_node->value);
 			current_node->value = strdup(value);
-			/* printf("%s is now the value of %p\n", current_node->value, (void *)current_node); */
+			/* printf("%s is now the value of %p\n", current_node->value, \
+			   (void *)current_node); */
 			if (current_node->value == NULL) {
 				return 1;
 			}
@@ -54,10 +57,13 @@ int add_node(List **head, const char *key, const char *value)
 	}
 	new_node->key = strdup(key);
 	if (new_node->key == NULL) {
+		free(new_node);
 		return 1;
 	}
 	new_node->value = strdup(value);
 	if (new_node->value == NULL) {
+		free(new_node->key);
+		free(new_node);
 		return 1;
 	}
 
@@ -72,11 +78,13 @@ int add_node(List **head, const char *key, const char *value)
 	*head = new_node;
 	/* printf("address of head is now %p\n", (void*)*head); */
 
-	/* printf("adding new node %p, with key %s and value %s\n", (void *)new_node, new_node->key, new_node->value); 
+	/* printf("adding new node %p, with key %s and value %s\n", \
+	   (void *)new_node, new_node->key, new_node->value); 
 	if (new_node->next == NULL) {
 		printf("new node next is NULL\n");
 	} else {
-		printf("new node next is %p with key %s and value %s\n", (void *)new_node->next, (new_node->next)->key, (new_node->next)->value);
+		printf("new node next is %p with key %s and value %s\n", \
+		(void *)new_node->next, (new_node->next)->key, (new_node->next)->value);
 	} */
 	return 0;
 }
