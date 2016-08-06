@@ -5,6 +5,7 @@
 int btree_insert(BTree **tree, char *data);
 BTree *btree_find(BTree *tree, char *str);
 BTree *array_to_btree(char **array);
+void btree_free(BTree *tree);
 
 int main(void)
 {
@@ -42,5 +43,8 @@ int main(void)
     {
       printf("Couldn't find anything\n");
     }
+
+  btree_free(tree);
+  
   return (0);
 }
