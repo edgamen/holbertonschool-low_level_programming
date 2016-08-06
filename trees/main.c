@@ -4,17 +4,26 @@
 
 int btree_insert(BTree **tree, char *data);
 BTree *btree_find(BTree *tree, char *str);
+BTree *array_to_btree(char **array);
 
 int main(void)
 {
   BTree *tree;
   BTree *a_node;
+  char *strings[] = {"Here", "is", "Holberton!", NULL};
   
-  tree = NULL;
+  /* tree = NULL;
   btree_insert(&tree, "Here");
   btree_insert(&tree, "is");
-  btree_insert(&tree, "Holberton!");
+  btree_insert(&tree, "Holberton!"); */
 
+  tree = array_to_btree(strings);
+  if (tree == NULL)
+    {
+      printf("error");
+      return (-1);
+    }
+  
   a_node = btree_find(tree, "afab");
   if (a_node != NULL)
     {
