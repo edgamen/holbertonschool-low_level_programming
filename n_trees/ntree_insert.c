@@ -29,7 +29,7 @@ int ntree_insert(NTree **tree, char **parents, char *data)
     }
   else
     {
-      parent = find_parent_node(*tree, parents)
+      parent = find_parent_node(*tree, parents);
     }
 
   return (0);
@@ -72,11 +72,13 @@ NTree *find_parent_node(Ntree *tree, char **parents)
   i = 0;
   while (parents[i] != NULL)
     {
+      printf("Item of array: %s, string in current tree node: %s\n", parents[i], current_tree_node->str)
       /* If the node string matches the first item in parents,
 	 move onto next item in array and compare to strings
 	 in children of node */
       if (strcmp(current_tree_node->str, parents[i]) == 0)
 	{
+	  printf("Matched; moving down a level to children and next array item\n");
 	  current_list = current_tree_node->children;
 	  current_tree_node = current_list->node;
 	  i++;
@@ -86,11 +88,13 @@ NTree *find_parent_node(Ntree *tree, char **parents)
 	 depth */
       else
 	{
+	  printf("Did not matching; moving onto the next node in this level\n");
 	  current_list = current_list->next;
 	  current_tree_node = current_list->node;
 	}
     }
 
+  printf("Next item in array is NULL, current tree node is: %s\n", current_tree_node->str);
   return current_tree_node;
 }
 
