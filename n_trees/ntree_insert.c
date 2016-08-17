@@ -88,7 +88,7 @@ NTree *find_parent_node(Ntree *tree, char **parents)
 	 depth */
       else
 	{
-	  printf("Did not matching; moving onto the next node in this level\n");
+	  printf("Did not match; moving onto the next node in this level\n");
 	  current_list = current_list->next;
 	  current_tree_node = current_list->node;
 	}
