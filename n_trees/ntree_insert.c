@@ -47,7 +47,7 @@ int ntree_insert(NTree **tree, char **parents, char *data)
 	  return (1);
 	}
 
-        /* debugging statements: */
+      /* debugging statements: */
       printf("Addr of parent tree node: %p\n",	\
 	     (void *)(parent));
       printf("String in parent tree node: %s\n", parent->str);
@@ -55,6 +55,15 @@ int ntree_insert(NTree **tree, char **parents, char *data)
 	 (void *)(parent->children));
       printf("String in first node of children list: %s\n",	\
 	 parent->children->node->str);
+      printf("Addr of next node in children list: %p\n",	\
+	 (void *)(parent->children->next));
+
+      if (parent->children->next != NULL)
+	{
+	  printf("String in next node of children list: %s\n",	\
+	 parent->children->next->node->str);
+	}
+      printf("\n");
 
     }
 

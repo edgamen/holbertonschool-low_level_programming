@@ -14,5 +14,7 @@ int main(void)
   ntree_insert(&tree, NULL, "/");
   ntree_insert(&tree, (array = string_split("/", ' ')), "tmp");
 
+  ntree_insert(&tree, (array = string_split("/", ',')), "mnt");
+
   return (0);
 }
