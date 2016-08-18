@@ -147,14 +147,22 @@ NTree *find_parent_node(NTree *tree, char **parents)
 
   current_tree_node = tree;
   i = 0;
-  while (parents[i + 1] != NULL)
+  while (1)
     {
       printf("Item of array: %s, string in current tree node: %s\n", parents[i], current_tree_node->str);
-      /* If the node string matches the first item in parents,
+      /* If the node string matches the current str in parents, and
+	 it's the last item in array, break out of loop and return
+	 current node */
+      if (strcmp(current_tree_node->str, parents[i]) == 0 && \
+	  parents[i + 1] == NULL)
+	{
+	  printf("Matched; next item in array is NULL; exiting loop\n");
+	  break;
+	}
+      /* If the node string matches the current str in parents,
 	 move onto next item in array and compare to strings
 	 in children of node */
-      if (strcmp(current_tree_node->str, parents[i]) == 0)
-	{
+      else if (strcmp(current_tree_node->str, parents[i]) == 0) {
 	  printf("Matched; moving down a level to children and next array item\n");
 	  current_list = current_tree_node->children;
 	  current_tree_node = current_list->node;
@@ -174,7 +182,3 @@ NTree *find_parent_node(NTree *tree, char **parents)
   printf("Next item in array is NULL, current tree node is: %s\n", current_tree_node->str);
   return current_tree_node;
 }
-
-/*List *new_list(List **head)
-{
-}*/
