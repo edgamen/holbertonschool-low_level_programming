@@ -1,0 +1,2 @@
+- Make directories for source files, includes
+- Rework Makefile to use source file dir, include dir

@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Werror -Wextra -Wpedantic -Wall
-SOURCES = main.c init_instance.c
+SOURCES = main.c init_instance.c draw_maze.c poll_events.c clean_up_SDL.c
 OBJECTS = $(SOURCES:.c=.o)
 EXE = maze
 

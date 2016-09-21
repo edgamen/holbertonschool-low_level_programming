@@ -18,5 +18,10 @@ typedef struct SDL_Instance
 int init_instance(SDL_Instance *);
 /* Draw what will be presented on window */
 void draw_maze(SDL_Instance instance);
+/* Check SDL queue of events for handling */
+int poll_events(void);
+/* Perform clean-up tasks related to SDL before 
+   quitting*/
+void clean_up_SDL(SDL_Instance *instance);
 
 #endif
