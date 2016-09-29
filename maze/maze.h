@@ -9,13 +9,25 @@ typedef struct SDL_Instance
   SDL_Renderer *renderer;
 } SDL_Instance;
 
+typedef struct Player_POV
+{
+  int x_coord;
+  int y_coord;
+  int angle;
+} Player_POV;
+
 /* Macros: */
 #define WINDOW_TITLE "Maze"
 #define WINDOW_WIDTH 1260
 #define WINDOW_HEIGHT 720
+#define CUBE_LENGTH 64 /* units */
+#define FIELD_OF_VISION 60 /* degrees */
+#define PLAYER_HEIGHT 32 /* units */
 
 /* Initialize a new instance of SDL */
 int init_instance(SDL_Instance *);
+/* Initialize map data and return map array */
+char *init_map(void);
 /* Draw what will be presented on window */
 void draw_maze(SDL_Instance instance);
 /* Check SDL queue of events for handling */

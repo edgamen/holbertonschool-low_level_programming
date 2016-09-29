@@ -5,7 +5,14 @@
 int main(void)
 {
   SDL_Instance instance;
+  char *map;
 
+  /* Initialize player and map data */
+  map = init_map();
+  /* Now test the map we made -- each char is 64 units wide, so player will be in one of these... sigh */
+  /* Based on initial player location and map data,
+     calculate the wall height of ea. column-- store it in an array? */
+  
   if (init_instance(&instance) != 0)
     {
       return (1);
