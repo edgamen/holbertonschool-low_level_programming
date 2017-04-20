@@ -1,4 +1,4 @@
-#include "../inc/maze.h"
+#include "maze.h"
 #include <stdio.h>
 
 /* Return 0 on success, 1 on failure */

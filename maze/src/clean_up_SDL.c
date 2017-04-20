@@ -1,4 +1,4 @@
-#include "../inc/maze.h"
+#include "maze.h"
 
 /* Perform clean-up tasks related to SDL before quitting */
 void clean_up_SDL(SDL_Instance *instance)

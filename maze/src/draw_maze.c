@@ -1,4 +1,4 @@
-#include "../inc/maze.h"
+#include "maze.h"
 
 /* Set what will be drawn on window during loop */
 void draw_maze(SDL_Instance instance)

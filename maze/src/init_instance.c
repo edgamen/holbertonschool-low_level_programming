@@ -1,4 +1,4 @@
-#include "../inc/maze.h"
+#include "maze.h"
 
 /* Initialize a new instance of SDL
    Return 0 on success, 1 on fail

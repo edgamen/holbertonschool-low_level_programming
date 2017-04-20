@@ -1,18 +1,22 @@
 CC = gcc
-CFLAGS = -Werror -Wextra -Wpedantic -Wall
-SOURCES = $(wildcard ./src/*.c)
+IDIR =./inc
+ODIR=./obj
+SRCDIR=./src
+CFLAGS = -Werror -Wextra -Wpedantic -Wall -I$(IDIR)
 DEP = $(wildcard ./inc/*.h)
-OBJECTS = $(SOURCES:.c=.o)
+SOURCES = $(wildcard ./src/*.c)
+OBJECTS = $(addprefix obj/,$(notdir $(SOURCES:.c=.o)))
 EXE = maze
 
 all: $(SOURCES) $(EXE) $(DEP)
 
-$(OBJECTS): $(DEP)
-
 $(EXE): $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) -o $@ `sdl2-config --libs` -lSDL2_ttf
+	$(CC) $(OBJECTS) -o $@ `sdl2-config --libs` -lSDL2_ttf
+
+$(ODIR)/%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 re: clean all
 
 clean:
-	rm -f *.o
+	rm -f $(ODIR)/*.o
