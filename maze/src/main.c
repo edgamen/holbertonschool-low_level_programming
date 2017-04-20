@@ -5,6 +5,10 @@
 int main(void)
 {
   SDL_Instance instance;
+  int sky_position[4] = SKY_POS;
+  int sky_color[4] = SKY_COLOR;
+  int floor_position[4] = FLOOR_POS;
+  int floor_color[4] = FLOOR_COLOR;
   char *map;
 
   /* Initialize player and map data */
@@ -24,7 +28,8 @@ int main(void)
       SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 0);
       SDL_RenderClear(instance.renderer);
       draw_maze(instance);
-      draw_rectangle(instance);
+      draw_rectangle(instance, sky_position, sky_color);
+      draw_rectangle(instance, floor_position, floor_color);
       SDL_RenderPresent(instance.renderer);
     }
 

@@ -24,7 +24,11 @@ typedef struct Player_POV
 #define FIELD_OF_VISION 60 /* degrees */
 #define PLAYER_HEIGHT 32 /* units */
 
-#define SKY_COLOR 0, 90, 245, 255
+/* note: can use SDL_COLOR in the future */
+#define SKY_COLOR {102, 194, 255, 0}
+#define SKY_POS {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT / 2}
+#define FLOOR_COLOR {51, 153, 102, 0}
+#define FLOOR_POS {0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2}
 
 /* Initialize a new instance of SDL */
 int init_instance(SDL_Instance *);
@@ -33,7 +37,7 @@ char *init_map(void);
 /* Draw what will be presented on window */
 void draw_maze(SDL_Instance instance);
 /* Render a rectangle */
-void draw_rectangle(SDL_Instance instance);
+void draw_rectangle(SDL_Instance instance, int positions[], int colors[]);
 /* Check SDL queue of events for handling */
 int poll_events(void);
 /* Perform clean-up tasks related to SDL before

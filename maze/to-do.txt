@@ -1,2 +1,7 @@
-- Make directories for source files, includes
-- Rework Makefile to use source file dir, include dir
+- use SDL_COLOR to initialize colors instead of reading directly from array
+- X Make directories for source files, includes
+- X Rework Makefile to use source file dir, include dir
+
+To research:
+- static const & const variables
+- linking and libraries

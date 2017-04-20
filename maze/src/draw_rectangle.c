@@ -1,13 +1,14 @@
 #include "maze.h"
 
 /* Draw a rectangle */
-void draw_rectangle(SDL_Instance sdl_instance)
+void draw_rectangle(SDL_Instance sdl_instance, int positions[], int colors[])
 {
     SDL_Rect rectangle;
-    rectangle.x = 0;
-    rectangle.y = 0;
-    rectangle.w = WINDOW_WIDTH;
-    rectangle.h = WINDOW_HEIGHT / 2;
-    SDL_SetRenderDrawColor(sdl_instance.renderer, 0, 90, 245, 255);
+    rectangle.x = positions[0];
+    rectangle.y = positions[1];
+    rectangle.w = positions[2];
+    rectangle.h = positions[3];
+    SDL_SetRenderDrawColor(sdl_instance.renderer, colors[0], colors[1],
+        colors[2], colors[3]);
     SDL_RenderFillRect(sdl_instance.renderer, &rectangle);
 }
