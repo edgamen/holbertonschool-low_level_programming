@@ -9,7 +9,8 @@ int main(void)
 
   /* Initialize player and map data */
   map = init_map();
-  /* Now test the map we made -- each char is 64 units wide, so player will be in one of these... sigh */
+  /* Now test the map we made -- each char is 64 units wide, so player will be
+  in one of these... sigh */
   /* Based on initial player location and map data,
      calculate the wall height of ea. column-- store it in an array? */
 
@@ -23,6 +24,7 @@ int main(void)
       SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 0);
       SDL_RenderClear(instance.renderer);
       draw_maze(instance);
+      draw_rectangle(instance);
       SDL_RenderPresent(instance.renderer);
     }
 

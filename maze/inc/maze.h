@@ -18,11 +18,13 @@ typedef struct Player_POV
 
 /* Macros: */
 #define WINDOW_TITLE "Maze"
-#define WINDOW_WIDTH 1260
-#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
 #define CUBE_LENGTH 64 /* units */
 #define FIELD_OF_VISION 60 /* degrees */
 #define PLAYER_HEIGHT 32 /* units */
+
+#define SKY_COLOR 0, 90, 245, 255
 
 /* Initialize a new instance of SDL */
 int init_instance(SDL_Instance *);
@@ -30,9 +32,11 @@ int init_instance(SDL_Instance *);
 char *init_map(void);
 /* Draw what will be presented on window */
 void draw_maze(SDL_Instance instance);
+/* Render a rectangle */
+void draw_rectangle(SDL_Instance instance);
 /* Check SDL queue of events for handling */
 int poll_events(void);
-/* Perform clean-up tasks related to SDL before 
+/* Perform clean-up tasks related to SDL before
    quitting*/
 void clean_up_SDL(SDL_Instance *instance);
 
