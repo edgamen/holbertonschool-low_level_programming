@@ -1,4 +1,6 @@
 - use SDL_COLOR to initialize colors instead of reading directly from array
+- potentially pass pointer to sdl instance instead of passing directly for
+    drawing functions
 - X Make directories for source files, includes
 - X Rework Makefile to use source file dir, include dir
 

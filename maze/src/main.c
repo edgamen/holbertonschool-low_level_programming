@@ -5,10 +5,17 @@
 int main(void)
 {
   SDL_Instance instance;
+  Player_POV *player;
   char *map;
 
   /* Initialize player and map data */
   map = init_map();
+  player = init_player();
+  /* Debugging: */
+  printf("Player x: %i\n", player->x_coord);
+  printf("Player y: %i\n", player->y_coord);
+  printf("Player angle: %i\n", player->angle);
+
   /* Now test the map we made -- each char is 64 units wide, so player will be
   in one of these... sigh */
   /* Based on initial player location and map data,

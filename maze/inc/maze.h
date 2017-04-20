@@ -18,11 +18,15 @@ typedef struct Player_POV
 
 /* Macros: */
 #define WINDOW_TITLE "Maze"
-#define WINDOW_WIDTH 640
-#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 320
+#define WINDOW_HEIGHT 240
 #define CUBE_LENGTH 64 /* units */
 #define FIELD_OF_VISION 60 /* degrees */
 #define PLAYER_HEIGHT 32 /* units */
+
+#define DEFAULT_START_POS_X 6.5 * CUBE_LENGTH
+#define DEFAULT_START_POS_Y 1.5 * CUBE_LENGTH
+#define DEFAULT_START_ANGLE 45 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}
@@ -34,6 +38,8 @@ typedef struct Player_POV
 int init_instance(SDL_Instance *);
 /* Initialize map data and return map array */
 char *init_map(void);
+/* Return pointer to player instance */
+Player_POV *init_player(void);
 /* Check SDL queue of events for handling */
 int poll_events(void);
 /* Draw what will be presented on window */
