@@ -34,16 +34,17 @@ typedef struct Player_POV
 int init_instance(SDL_Instance *);
 /* Initialize map data and return map array */
 char *init_map(void);
+/* Check SDL queue of events for handling */
+int poll_events(void);
 /* Draw what will be presented on window */
 void draw_scene(SDL_Instance instance);
 /* Draw the maze */
 void draw_maze(SDL_Instance instance);
 /* Draw a rectangle */
 void draw_rectangle(SDL_Instance instance, int positions[], int colors[]);
-/* Check SDL queue of events for handling */
-int poll_events(void);
-/* Perform clean-up tasks related to SDL before
-   quitting*/
+/* Cast ray to determine attributes of column to draw */
+int *cast_ray(int column_i);
+/* Perform clean-up tasks related to SDL before quitting*/
 void clean_up_SDL(SDL_Instance *instance);
 
 #endif
