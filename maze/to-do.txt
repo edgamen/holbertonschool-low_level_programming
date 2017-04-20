@@ -5,3 +5,7 @@
 To research:
 - static const & const variables
 - linking and libraries
+
+Notes:
+- Even SDL_RenderClear() can return an error, but in examples it doesn't seem
+ to be checked: https://wiki.libsdl.org/SDL_RenderClear

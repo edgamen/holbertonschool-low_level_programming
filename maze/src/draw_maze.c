@@ -1,6 +1,6 @@
 #include "maze.h"
 
-/* Set what will be drawn on window during loop */
+/* Draw the maze */
 void draw_maze(SDL_Instance instance)
 {
   SDL_SetRenderDrawColor(instance.renderer, 0xFF, 0xFF, 0xFF, 0xFF);

@@ -35,8 +35,10 @@ int init_instance(SDL_Instance *);
 /* Initialize map data and return map array */
 char *init_map(void);
 /* Draw what will be presented on window */
+void draw_scene(SDL_Instance instance);
+/* Draw the maze */
 void draw_maze(SDL_Instance instance);
-/* Render a rectangle */
+/* Draw a rectangle */
 void draw_rectangle(SDL_Instance instance, int positions[], int colors[]);
 /* Check SDL queue of events for handling */
 int poll_events(void);
