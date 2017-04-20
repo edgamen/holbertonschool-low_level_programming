@@ -1,4 +1,4 @@
-#include "maze.h"
+#include "../inc/maze.h"
 
 /* Return 1 if any quit event occurs; otherwise return 0 if all events have been checked */
 int poll_events(void)
@@ -6,7 +6,7 @@ int poll_events(void)
   SDL_Event event;
   SDL_KeyboardEvent key;
 
-  /* While the queue is not empty: 
+  /* While the queue is not empty:
      Check if any of the events refer to quitting the program */
   while (SDL_PollEvent(&event))
     {

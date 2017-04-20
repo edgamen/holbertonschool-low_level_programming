@@ -1,10 +1,13 @@
 CC = gcc
 CFLAGS = -Werror -Wextra -Wpedantic -Wall
-SOURCES = main.c init_instance.c draw_maze.c poll_events.c clean_up_SDL.c init_map.c
+SOURCES = $(wildcard ./src/*.c)
+DEP = $(wildcard ./inc/*.h)
 OBJECTS = $(SOURCES:.c=.o)
 EXE = maze
 
-all: $(SOURCES) $(EXE)
+all: $(SOURCES) $(EXE) $(DEP)
+
+$(OBJECTS): $(DEP)
 
 $(EXE): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $@ `sdl2-config --libs` -lSDL2_ttf

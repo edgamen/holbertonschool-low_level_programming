@@ -1,4 +1,4 @@
-#include "maze.h"
+#include "../inc/maze.h"
 
 /* Initialize a new instance of SDL
    Return 0 on success, 1 on fail
@@ -37,11 +37,11 @@ int init_instance(SDL_Instance *instance)
       SDL_Quit();
       return (1);
     }
-  
+
   /* Debugging: */
   printf("Addr of instance: %p\n", (void *)instance);
   printf("Addr of window: %p\n", (void *)instance->window);
   printf("Addr of renderer: %p\n", (void *)instance->renderer);
-  
+
   return (0);
 }
