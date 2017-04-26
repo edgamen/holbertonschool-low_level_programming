@@ -7,6 +7,12 @@
 To research:
 - static const & const variables
 - linking and libraries
+- is it ok to do math with floats when initializing int?
+- is it OK to return a pointer from a function instead of passing a pointer
+and initializing variables? won't the stack be erased?
+
+Edge cases:
+- what if no walls provided in map? And we check ray until we 'hit' a wall?
 
 Notes:
 - Even SDL_RenderClear() can return an error, but in examples it doesn't seem

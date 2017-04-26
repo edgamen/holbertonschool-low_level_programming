@@ -13,12 +13,14 @@ int init_instance(SDL_Instance *instance)
     }
 
   /* Create a new SDL_Window instance */
-  instance->window = SDL_CreateWindow( WINDOW_TITLE, \
-				       SDL_WINDOWPOS_CENTERED,	\
-				       SDL_WINDOWPOS_CENTERED,	\
-				       WINDOW_WIDTH,		\
-				       WINDOW_HEIGHT,		\
-				       0 );
+  instance->window = SDL_CreateWindow(
+      WINDOW_TITLE,     \
+      SDL_WINDOWPOS_CENTERED,	\
+      SDL_WINDOWPOS_CENTERED,	\
+      WINDOW_WIDTH,	    \
+      WINDOW_HEIGHT,    \
+	  0
+    );
   if (instance->window == NULL)
     {
       fprintf( stderr, "Unable to create window: %s\n", SDL_GetError() );

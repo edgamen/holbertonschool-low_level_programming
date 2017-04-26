@@ -6,7 +6,7 @@ int main(void)
 {
   SDL_Instance instance;
   Player_POV *player;
-  char *map;
+  char *map[MAP_WIDTH][MAP_HEIGHT];
 
   /* Initialize player and map data */
   map = init_map();
@@ -16,22 +16,21 @@ int main(void)
   printf("Player y: %i\n", player->y_coord);
   printf("Player angle: %i\n", player->angle);
 
-  /* Now test the map we made -- each char is 64 units wide, so player will be
-  in one of these... sigh */
-  /* Based on initial player location and map data,
-     calculate the wall height of ea. column-- store it in an array? */
-
   if (init_instance(&instance) != 0)
     {
       return (1);
     }
 
-  while (poll_events() == 0)
+    while (poll_events() == 0)
     {
       SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 0);
       SDL_RenderClear(instance.renderer);
-      draw_scene(instance);
+      draw_scene(instance, player, map);
       SDL_RenderPresent(instance.renderer);
+      /* remove when finished testing */
+      if (TESTING) {
+          break;
+      }
     }
 
   clean_up_SDL(&instance);
