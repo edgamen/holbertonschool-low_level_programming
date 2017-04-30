@@ -5,7 +5,8 @@
 int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     static int coords[2];
-    int distance;
+    int raw_distance;
+    int skewed_distance;
     int col_length;
 
     /* Debugging: */
@@ -19,9 +20,10 @@ int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         printf("%s\n", "====== CAST_RAY START =====");
     }
 
-    distance = find_distance(ray_angle, player, map);
-    printf("distance: %i\n", distance);
-    col_length = distance * SCALE_VALUE;
+    raw_distance = find_distance(ray_angle, player, map);
+    skewed_distance = player->angle - ray_angle;
+    printf("distance: %i, skewed_distance: %i\n", raw_distance, skewed_distance);
+    col_length = skewed_distance * SCALE_VALUE;
     printf("wall slice (column) length: %i\n", col_length);
     coords[0] = WINDOW_HEIGHT / 2 - col_length / 2;
     coords[1] = coords[0] + col_length;
