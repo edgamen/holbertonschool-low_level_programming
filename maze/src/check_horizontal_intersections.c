@@ -2,28 +2,28 @@
 #include <stdlib.h>
 #include <math.h>
 
-int check_horizontal_intersections(int *horizontal_coords, float ray_angle,
+int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH])
 {
-    int start_x;
-    int start_y;
-    int delta_x;
-    int delta_y;
+    float start_x;
+    float start_y;
+    float delta_x;
+    float delta_y;
     int ray_horizontal = ray_angle == 0 || ray_angle == 180 || ray_angle == 360;
     int ray_vertical = ray_angle == 90 || ray_angle == 270;
     int ray_facing_up = ray_angle > 0 && ray_angle < 180;
     int ray_facing_down = ray_angle > 180 && ray_angle < 360;
-    /* int ray_facing_right = (ray_facing_up && ray_angle < 90) ||
+    /* float ray_facing_right = (ray_facing_up && ray_angle < 90) ||
         (ray_facing_down && ray_angle > 270); */
     int found_wall = 0;
 
     if (HIDE_INFO) {
-        printf("Player x: %i\n", player->x_coord);
-        printf("Player y: %i\n", player->y_coord);
-        printf("Player angle: %i\n", player->angle);
+        printf("Player x: %f\n", player->x_coord);
+        printf("Player y: %f\n", player->y_coord);
+        printf("Player angle: %f\n", player->angle);
         printf("ray angle: %f\n", ray_angle);
-        printf("horizontal coords x: %i\n", horizontal_coords[0]);
-        printf("horizontal coords y: %i\n", horizontal_coords[1]);
+        printf("horizontal coords x: %f\n", horizontal_coords[0]);
+        printf("horizontal coords y: %f\n", horizontal_coords[1]);
         printf("map[0][0] %c\n", map[0][0]);
     } else if (DEBUG) {
         printf("%s\n", "====== START CHECK_HORIZONTAL_INTERSECTIONS =====");
@@ -62,7 +62,7 @@ int check_horizontal_intersections(int *horizontal_coords, float ray_angle,
     found_wall = check_for_wall(horizontal_coords, start_x, start_y,
         delta_x, delta_y, map);
 
-    printf("====== END CHECK_HORIZONTAL_INTERSECTIONS; found_wall = %i, x %i, y %i ===== \n",
+    printf("====== END CHECK_HORIZONTAL_INTERSECTIONS; found_wall = %i, x %f, y %f ===== \n",
     found_wall, horizontal_coords[0], horizontal_coords[1]);
     return found_wall;
 }

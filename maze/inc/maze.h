@@ -11,15 +11,15 @@ typedef struct SDL_Instance
 
 typedef struct Player_POV
 {
-  int x_coord;
-  int y_coord;
-  int angle;
+  float x_coord;
+  float y_coord;
+  float angle;
 } Player_POV;
 
 typedef struct Coord
 {
-  int x;
-  int y;
+  float x;
+  float y;
 } Coord;
 
 /* Macros: */
@@ -56,33 +56,33 @@ typedef struct Coord
 #define SCALE_VALUE CUBE_LENGTH / PROJECTION_PLANE_DISTANCE
 
 /* Initialize a new instance of SDL */
-int init_instance(SDL_Instance *);
+float init_instance(SDL_Instance *);
 /* Initialize map data and return map array */
 char (*init_map(void))[MAP_WIDTH];
 /* Return pointer to player instance */
 Player_POV *init_player(void);
 /* Check SDL queue of events for handling */
-int poll_events(void);
+float poll_events(void);
 /* Draw what will be presented on window */
 void draw_scene(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Draw the maze */
 void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Draw a rectangle */
-void draw_rectangle(SDL_Instance instance, int positions[], int colors[]);
+void draw_rectangle(SDL_Instance instance, float positions[], float colors[]);
 /* Cast ray to determine attributes of column to draw */
-int *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+float *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
-int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
-int check_horizontal_intersections(int *horizontal_coords, float ray_angle,
+float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no vertical intersection of ray and wall, else return 1
 and set value of vertical_coords to the closest intersection */
-int check_vertical_intersections(int *vertical_coords, float ray_angle,
+int check_vertical_intersections(float *vertical_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Helper function to check for points along the ray for walls */
-int check_for_wall(int *coords, int start_x, int start_y, int delta_x,
-    int delta_y, char (*map)[MAP_WIDTH]);
+int check_for_wall(float *coords, float start_x, float start_y, float delta_x,
+    float delta_y, char (*map)[MAP_WIDTH]);
 /* Perform clean-up tasks related to SDL before quitting*/
 void clean_up_SDL(SDL_Instance *instance);
 

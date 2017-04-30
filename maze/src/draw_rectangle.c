@@ -1,7 +1,7 @@
 #include "maze.h"
 
 /* Draw a rectangle */
-void draw_rectangle(SDL_Instance sdl_instance, int positions[], int colors[])
+void draw_rectangle(SDL_Instance sdl_instance, float positions[], float colors[])
 {
     SDL_Rect rectangle;
     rectangle.x = positions[0];

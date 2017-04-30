@@ -12,9 +12,9 @@ int main(void)
   map = init_map();
   player = init_player();
   /* Debugging: */
-  printf("Player x: %i\n", player->x_coord);
-  printf("Player y: %i\n", player->y_coord);
-  printf("Player angle: %i\n", player->angle);
+  printf("Player x: %f\n", player->x_coord);
+  printf("Player y: %f\n", player->y_coord);
+  printf("Player angle: %f\n", player->angle);
 
   if (init_instance(&instance) != 0)
     {

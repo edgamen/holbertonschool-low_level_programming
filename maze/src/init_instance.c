@@ -3,7 +3,7 @@
 /* Initialize a new instance of SDL
    Return 0 on success, 1 on fail
  */
-int init_instance(SDL_Instance *instance)
+float init_instance(SDL_Instance *instance)
 {
   /* Initialize SDL */
   if (SDL_Init(SDL_INIT_VIDEO) != 0)

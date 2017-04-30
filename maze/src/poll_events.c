@@ -1,7 +1,7 @@
 #include "maze.h"
 
 /* Return 1 if any quit event occurs; otherwise return 0 if all events have been checked */
-int poll_events(void)
+float poll_events(void)
 {
   SDL_Event event;
   SDL_KeyboardEvent key;

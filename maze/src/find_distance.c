@@ -1,9 +1,9 @@
 #include "maze.h"
 #include <stdlib.h>
 
-int calculate_distance(Player_POV *player, int *coords) {
-    int x_diff;
-    int y_diff;
+float calculate_distance(Player_POV *player, float *coords) {
+    float x_diff;
+    float y_diff;
 
 
     x_diff = (player->x_coord - coords[0]);
@@ -12,21 +12,21 @@ int calculate_distance(Player_POV *player, int *coords) {
 }
 
 /* Draw the maze */
-int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
+float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     int found_horizontal_coords;
-    int horizontal_coords[2] = {5, 4};
+    float horizontal_coords[2] = {5, 4};
     int found_vertical_coords;
-    int vertical_coords[2] = {2, 3};
+    float vertical_coords[2] = {2, 3};
 
-    int distance_to_horizontal_coord;
-    int distance_to_vertical_coord;
+    float distance_to_horizontal_coord;
+    float distance_to_vertical_coord;
 
     /* Debugging: */
     if (HIDE_INFO) {
-        printf("Player x: %i\n", player->x_coord);
-        printf("Player y: %i\n", player->y_coord);
-        printf("Player angle: %i\n", player->angle);
+        printf("Player x: %f\n", player->x_coord);
+        printf("Player y: %f\n", player->y_coord);
+        printf("Player angle: %f\n", player->angle);
         printf("char: %c\n", map[0][0]);
         printf("ray angle: %f\n", ray_angle);
     } else if (DEBUG) {
@@ -43,14 +43,14 @@ int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         if (!found_horizontal_coords) {
             printf("%s\n", "NO HORIZONTAL COORDS");
         } else {
-            printf("horizontal_coords x: %i\n", horizontal_coords[0]);
-            printf("horizontal_coords y: %i\n", horizontal_coords[1]);
+            printf("horizontal_coords x: %f\n", horizontal_coords[0]);
+            printf("horizontal_coords y: %f\n", horizontal_coords[1]);
         }
         if (!found_vertical_coords) {
             printf("%s\n", "NO VERTICAL COORDS");
         } else {
-            printf("vertical_coords x: %i\n", vertical_coords[0]);
-            printf("vertical_coords y: %i\n", vertical_coords[1]);
+            printf("vertical_coords x: %f\n", vertical_coords[0]);
+            printf("vertical_coords y: %f\n", vertical_coords[1]);
         }
     }
 
@@ -64,8 +64,8 @@ int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     distance_to_horizontal_coord =
         calculate_distance(player, horizontal_coords);
     distance_to_vertical_coord = calculate_distance(player, vertical_coords);
-    printf("distance to horizontal coord: %i\n", distance_to_horizontal_coord);
-    printf("distance to vertical coord: %i\n", distance_to_vertical_coord);
+    printf("distance to horizontal coord: %f\n", distance_to_horizontal_coord);
+    printf("distance to vertical coord: %f\n", distance_to_vertical_coord);
     if (distance_to_horizontal_coord < distance_to_vertical_coord) {
        return distance_to_horizontal_coord;
     } else {

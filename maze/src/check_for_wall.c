@@ -1,18 +1,18 @@
 #include <maze.h>
 
 /* check if there is a wall at the coordinates we've specified */
-int check_for_wall(int *coords, int start_x, int start_y, int delta_x, int delta_y, char (*map)[MAP_WIDTH]) {
+int check_for_wall(float *coords, float start_x, float start_y, float delta_x, float delta_y, char (*map)[MAP_WIDTH]) {
     int found_wall = 0;
     int beyond_bounds = 0;
-    int x = start_x;
-    int y = start_y;
+    float x = start_x;
+    float y = start_y;
     int grid_x;
     int grid_y;
 
     while (!found_wall)
          {
-             printf("current x: %i\n", x);
-             printf("current y: %i\n", y);
+             printf("current x: %f\n", x);
+             printf("current y: %f\n", y);
             beyond_bounds =
                 x > MAP_WIDTH_BOUND ||
                 y > MAP_HEIGHT_BOUND ||
