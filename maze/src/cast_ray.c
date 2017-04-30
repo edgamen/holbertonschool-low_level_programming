@@ -7,6 +7,8 @@ int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     static int coords[2];
     int found_horizontal_coords;
     int horizontal_coords[2] = {5, 4};
+    int found_vertical_coords;
+    int vertical_coords[2] = {2, 3};
 
     /* Debugging: */
     if (HIDE_INFO) {
@@ -22,11 +24,20 @@ int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     /* do mathy things and calculate length of line to draw) */
     found_horizontal_coords = check_horizontal_intersections(horizontal_coords,
         ray_angle, player, map);
+    found_vertical_coords = check_vertical_intersections(vertical_coords,
+        ray_angle, player, map);
+
     if (!found_horizontal_coords) {
         printf("%s\n", "NO HORIZONTAL COORDS");
     } else {
         printf("horizontal_coords x: %i\n", horizontal_coords[0]);
         printf("horizontal_coords y: %i\n", horizontal_coords[1]);
+    }
+    if (!found_vertical_coords) {
+        printf("%s\n", "NO VERTICAL COORDS");
+    } else {
+        printf("vertical_coords x: %i\n", vertical_coords[0]);
+        printf("vertical_coords y: %i\n", vertical_coords[1]);
     }
 
     /*
