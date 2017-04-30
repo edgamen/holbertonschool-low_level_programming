@@ -5,10 +5,8 @@
 int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH])
 {
-    int current_x;
-    int current_y;
-    int grid_x;
-    int grid_y;
+    int start_x;
+    int start_y;
     int delta_x;
     int delta_y;
     int ray_horizontal = ray_angle == 0 || ray_angle == 180 || ray_angle == 360;
@@ -18,7 +16,6 @@ int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
     /* int ray_facing_right = (ray_facing_up && ray_angle < 90) ||
         (ray_facing_down && ray_angle > 270); */
     int found_wall = 0;
-    int beyond_bounds = 0;
 
     if (HIDE_INFO) {
         printf("Player x: %i\n", player->x_coord);
@@ -39,13 +36,13 @@ int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
     }
     else if (ray_facing_up)
     {
-        current_y = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
-        current_x = player->x_coord + (player->y_coord - current_y)/tan(ray_angle);
+        start_y = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
+        start_x = player->x_coord + (player->y_coord - start_y)/tan(ray_angle);
     }
     else if (ray_facing_down) {
-        current_y = floor(player->y_coord / CUBE_LENGTH)
+        start_y = floor(player->y_coord / CUBE_LENGTH)
             * CUBE_LENGTH + CUBE_LENGTH;
-        current_x = player->x_coord + (current_y - player->y_coord)/tan(ray_angle);
+        start_x = player->x_coord + (start_y - player->y_coord)/tan(ray_angle);
     } else {
         printf("warning! ray_angle %i is over 360 degrees, did not handle the case\n", ray_angle);
         return 0;
@@ -62,34 +59,8 @@ int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
         delta_x = -(CUBE_LENGTH/tan(ray_angle));
     }
     */
-
-    /* check if there is a wall at the coordinates we've specified */
-    while (!found_wall)
-         {
-             printf("current x: %i\n", current_x);
-             printf("current y: %i\n", current_y);
-            beyond_bounds =
-                 current_x > MAP_WIDTH_BOUND ||
-                 current_y > MAP_HEIGHT_BOUND ||
-                 current_x < 0 || current_y < 0;
-            if (beyond_bounds) {
-                printf("beyond bounds, breaking out of loop\n");
-                break;
-            }
-             grid_x = current_x / CUBE_LENGTH;
-             grid_y = current_y / CUBE_LENGTH;
-             printf("grid_x: %i, grid_y: %i\n", grid_x, grid_y);
-             printf("map[grid_y][grid_x]: %c\n", map[grid_y][grid_x]);
-            if (map[grid_y][grid_x] == 'X') {
-                found_wall = 1;
-                horizontal_coords[0] = current_x;
-                horizontal_coords[1] = current_y;
-            } else {
-                printf("did not find wall, repeating loop \n");
-            }
-            current_x += delta_x;
-            current_y += delta_y;
-         }
+    found_wall = check_for_wall(horizontal_coords, start_x, start_y,
+        delta_x, delta_y, map);
 
     printf("====== END CHECK_HORIZONTAL_INTERSECTIONS; found_wall = %i, x %i, y %i ===== \n",
     found_wall, horizontal_coords[0], horizontal_coords[1]);

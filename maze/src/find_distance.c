@@ -1,19 +1,26 @@
 #include "maze.h"
 #include <stdlib.h>
 
+int calculate_distance(Player_POV *player, int *coords) {
+    int x_diff;
+    int y_diff;
+
+    x_diff = (player->x_coord - coords[0]);
+    y_diff = (player->y_coord - coords[1]);
+    distance = sqrt(x_diff * x_diff + y_diff * y_diff);
+}
+
 /* Draw the maze */
-int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
+int find_distance(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
 {
-    int coords[0];
     int found_horizontal_coords;
     int horizontal_coords[2] = {5, 4};
     int found_vertical_coords;
     int vertical_coords[2] = {2, 3};
-    int x_diff;
-    int y_diff;
-    int distance;
+
     int distance_to_horizontal_coord;
     int distance_to_vertical_coord;
+
     /* Debugging: */
     if (HIDE_INFO) {
         printf("Player x: %i\n", player->x_coord);
@@ -22,7 +29,7 @@ int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         printf("char: %c\n", map[0][0]);
         printf("ray angle: %i\n", ray_angle);
     } else if (DEBUG) {
-        printf("%s\n", "====== CAST_RAY START =====");
+        printf("%s\n", "====== FIND_DISTANCE START =====");
     }
 
     /* do mathy things and calculate length of line to draw) */
@@ -47,34 +54,20 @@ int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     }
 
     if (!found_horizontal_coords && !found_vertical_coords) {
-        coords[0] = 0;
-        coords[1] = 0;
-        return coords; /* not no distance, but no wall for ray */
+        return (-1); /* not no distance, but no wall for ray */
     } else if (found_horizontal_coords && !found_vertical_coords) {
-        x_diff = (player->x_coord - horizontal_coords[0]);
-        y_diff = (player->y_coord - horizontal_coords[1]);
-        distance = sqrt(x_diff * x_diff + y_diff * y_diff);
-        /* calculate distance for horizontal coords & return */
+        return calculate_distance(player, horizontal_coords);
     } else if (!found_horizontal_coords && !found_vertical_coords) {
-        x_diff = (player->x_coord - vertical_coords[0]);
-        y_diff = (player->y_coord - vertical_coords[1]);
-        distance = sqrt(x_diff * x_diff + y_diff * y_diff);
-        /* calculate distance for vertical coords & return */
+        return calculate_distance(player, vertical_coords);
+    }
+    distance_to_horizontal_coord =
+        calculate_distance(player, horizontal_coords);
+    distance_to_vertical_coord = calculate_distance(player, vertical_coords);
+    if (distance_to_horizontal_coord < distance_to_vertical_coord) {
+       return distance_to_horizontal_coord;
     } else {
-        x_diff = (player->x_coord - horizontal_coords[0]);
-        y_diff = (player->y_coord - horizontal_coords[1]);
-        distance_to_horizontal_coord = sqrt(x_diff * x_diff + y_diff * y_diff);
-        x_diff = (player->x_coord - vertical_coords[0]);
-        y_diff = (player->y_coord - vertical_coords[1]);
-        distance_to_vertical_coord = sqrt(x_diff * x_diff + y_diff * y_diff);
-        if (distance_to_horizontal_coord < distance_to_vertical_coord) {
-            distance = distance_to_horizontal_coord;
-        } else {
-            distance = distance_to_vertical_coord;
-        }
-        /* compare distances and return the closer one */
+        return distance_to_vertical_coord;
     }
 
     printf("%s\n", "====== CAST_RAY END =====");
-    return coords;
 }

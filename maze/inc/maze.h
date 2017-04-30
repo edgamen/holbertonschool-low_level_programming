@@ -74,10 +74,16 @@ void draw_rectangle(SDL_Instance instance, int positions[], int colors[]);
 int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
-int check_horizontal_intersections(int *horizontal_coords, int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+int find_distance(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
+    Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no vertical intersection of ray and wall, else return 1
 and set value of vertical_coords to the closest intersection */
-int check_vertical_intersections(int *horizontal_coords, int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+int check_vertical_intersections(int *vertical_coords, int ray_angle,
+    Player_POV *player, char (*map)[MAP_WIDTH]);
+/* Helper function to check for points along the ray for walls */
+int check_for_wall(int *coords, int start_x, int start_y, int delta_x,
+    int delta_y, char (*map)[MAP_WIDTH]);
 /* Perform clean-up tasks related to SDL before quitting*/
 void clean_up_SDL(SDL_Instance *instance);
 

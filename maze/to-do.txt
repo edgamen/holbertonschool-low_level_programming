@@ -20,3 +20,7 @@ Notes:
 - Mallocing a multidimensional array may be better than declaring static,
 it just looks complicated; go for static first and then do malloc when
 refactoring
+- For horizontal / vertical coords, can pass pointer to base array pointer,
+and set to NULL (instead of the base array pointer) if no horizontal/vert coords
+are found; but let's stick with what works for now to save time, since we have
+a return type to use anyway
