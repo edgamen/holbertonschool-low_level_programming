@@ -23,7 +23,7 @@ typedef struct Coord
 } Coord;
 
 /* Macros: */
-#define TESTING 1
+#define TESTING 0
 #define HIDE_INFO 0
 #define DEBUG 1
 
@@ -50,11 +50,10 @@ typedef struct Coord
 #define FLOOR_COLOR {51, 153, 102, 0}
 #define FLOOR_POS {0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2}
 
-/* unused
-#define TAN30 = 0.57735026919
-#define PROJECTION_PLANE_DISTANCE = ( WINDOW_WIDTH / 2 ) / TAN30 -- should be
-    277 units
-*/
+
+#define TAN30 0.57735026919
+#define PROJECTION_PLANE_DISTANCE ( WINDOW_WIDTH / 2 ) / TAN30
+#define SCALE_VALUE CUBE_LENGTH / PROJECTION_PLANE_DISTANCE
 
 /* Initialize a new instance of SDL */
 int init_instance(SDL_Instance *);

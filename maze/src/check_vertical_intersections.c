@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <math.h>
 
-int *check_vertical_intersections(int *vertical_coords, int ray_angle,
+int check_vertical_intersections(int *vertical_coords, int ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH])
 {
-    int coords[2];
     int start_x;
     int start_y;
     int delta_x;

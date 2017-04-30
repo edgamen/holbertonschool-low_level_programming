@@ -5,9 +5,10 @@ int calculate_distance(Player_POV *player, int *coords) {
     int x_diff;
     int y_diff;
 
+
     x_diff = (player->x_coord - coords[0]);
     y_diff = (player->y_coord - coords[1]);
-    distance = sqrt(x_diff * x_diff + y_diff * y_diff);
+    return sqrt(x_diff * x_diff + y_diff * y_diff);
 }
 
 /* Draw the maze */
@@ -63,6 +64,8 @@ int find_distance(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     distance_to_horizontal_coord =
         calculate_distance(player, horizontal_coords);
     distance_to_vertical_coord = calculate_distance(player, vertical_coords);
+    printf("distance to horizontal coord: %i\n", distance_to_horizontal_coord);
+    printf("distance to vertical coord: %i\n", distance_to_vertical_coord);
     if (distance_to_horizontal_coord < distance_to_vertical_coord) {
        return distance_to_horizontal_coord;
     } else {
