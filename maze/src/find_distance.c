@@ -12,7 +12,7 @@ int calculate_distance(Player_POV *player, int *coords) {
 }
 
 /* Draw the maze */
-int find_distance(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
+int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     int found_horizontal_coords;
     int horizontal_coords[2] = {5, 4};
@@ -28,7 +28,7 @@ int find_distance(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         printf("Player y: %i\n", player->y_coord);
         printf("Player angle: %i\n", player->angle);
         printf("char: %c\n", map[0][0]);
-        printf("ray angle: %i\n", ray_angle);
+        printf("ray angle: %f\n", ray_angle);
     } else if (DEBUG) {
         printf("%s\n", "====== FIND_DISTANCE START =====");
     }

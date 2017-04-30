@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* Draw the maze */
-int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
+int *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     static int coords[2];
     int raw_distance;
@@ -15,7 +15,7 @@ int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         printf("Player y: %i\n", player->y_coord);
         printf("Player angle: %i\n", player->angle);
         printf("char: %c\n", map[0][0]);
-        printf("ray angle: %i\n", ray_angle);
+        printf("ray angle: %f\n", ray_angle);
     } else if (DEBUG) {
         printf("%s\n", "====== CAST_RAY START =====");
     }

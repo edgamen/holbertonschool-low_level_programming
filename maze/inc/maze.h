@@ -70,10 +70,10 @@ void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]
 /* Draw a rectangle */
 void draw_rectangle(SDL_Instance instance, int positions[], int colors[]);
 /* Cast ray to determine attributes of column to draw */
-int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+int *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
-int find_distance(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
 int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no vertical intersection of ray and wall, else return 1
