@@ -42,7 +42,7 @@ typedef struct Coord
 
 #define DEFAULT_START_POS_X 6.5 * CUBE_LENGTH
 #define DEFAULT_START_POS_Y 1.5 * CUBE_LENGTH
-#define DEFAULT_START_ANGLE 45 /* degrees */
+#define DEFAULT_START_ANGLE 30 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}
@@ -74,11 +74,11 @@ int *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
 int find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
-int check_horizontal_intersections(int *horizontal_coords, int ray_angle,
+int check_horizontal_intersections(int *horizontal_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no vertical intersection of ray and wall, else return 1
 and set value of vertical_coords to the closest intersection */
-int check_vertical_intersections(int *vertical_coords, int ray_angle,
+int check_vertical_intersections(int *vertical_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Helper function to check for points along the ray for walls */
 int check_for_wall(int *coords, int start_x, int start_y, int delta_x,

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-int check_vertical_intersections(int *vertical_coords, int ray_angle,
+int check_vertical_intersections(int *vertical_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH])
 {
     int start_x;
@@ -20,13 +20,13 @@ int check_vertical_intersections(int *vertical_coords, int ray_angle,
         printf("Player x: %i\n", player->x_coord);
         printf("Player y: %i\n", player->y_coord);
         printf("Player angle: %i\n", player->angle);
-        printf("ray angle: %i\n", ray_angle);
+        printf("ray angle: %f\n", ray_angle);
         printf("horizontal coords x: %i\n", vertical_coords[0]);
         printf("horizontal coords y: %i\n", vertical_coords[1]);
         printf("map[0][0] %c\n", map[0][0]);
     } else if (DEBUG) {
         printf("%s\n", "====== START CHECK_VERTICAL_INTERSECTIONS =====");
-        printf("ray angle: %i\n", ray_angle);
+        printf("ray angle: %f\n", ray_angle);
     }
 
     if (ray_vertical)
@@ -41,7 +41,7 @@ int check_vertical_intersections(int *vertical_coords, int ray_angle,
     else if (ray_facing_left) {
         start_x = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
     } else {
-        printf("warning! ray_angle %i is over 360 degrees, did not handle the case\n", ray_angle);
+        printf("warning! ray_angle %f is over 360 degrees, did not handle the case\n", ray_angle);
         return 0;
     }
     if (ray_facing_up) {
