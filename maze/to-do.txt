@@ -17,3 +17,6 @@ Edge cases:
 Notes:
 - Even SDL_RenderClear() can return an error, but in examples it doesn't seem
  to be checked: https://wiki.libsdl.org/SDL_RenderClear
+- Mallocing a multidimensional array may be better than declaring static,
+it just looks complicated; go for static first and then do malloc when
+refactoring

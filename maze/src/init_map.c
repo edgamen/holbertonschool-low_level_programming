@@ -1,13 +1,14 @@
 #include <string.h>
+#include <maze.h>
 
 /* Return an array that represents the map */
-char (*init_map(void)) [MAP_WIDTH][MAP_HEIGHT]
+char (*init_map(void))[MAP_WIDTH]
 {
     /*
     For now we will just use an array that symbolizes the map
     Eventually we may take map data from command line or from a file location
     */
-  char map[MAP_WIDTH][MAP_HEIGHT] = {
+  static char map[MAP_HEIGHT][MAP_WIDTH] = {
         {'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'},
 		{'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X'},
 		{'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X'},
@@ -19,5 +20,19 @@ char (*init_map(void)) [MAP_WIDTH][MAP_HEIGHT]
 		{'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'}
     };
 
-  return strdup(map);
+  return map;
 }
+
+/*
+char input[] = {
+      'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'O', 'O', 'O', 'O', 'O', 'O', 'X', '\n',
+      'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', '\0'
+  };
+*/

@@ -6,7 +6,7 @@ int main(void)
 {
   SDL_Instance instance;
   Player_POV *player;
-  char *map[MAP_WIDTH][MAP_HEIGHT];
+  char (*map)[MAP_WIDTH];
 
   /* Initialize player and map data */
   map = init_map();

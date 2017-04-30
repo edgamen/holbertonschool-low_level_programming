@@ -1,7 +1,7 @@
 #include "maze.h"
 
 /* Draw what will be shown on window during loop */
-void draw_scene(SDL_Instance instance, Player_POV *player, char *[MAP_WIDTH][MAP_HEIGHT])
+void draw_scene(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     int sky_position[4] = SKY_POS;
     int sky_color[4] = SKY_COLOR;

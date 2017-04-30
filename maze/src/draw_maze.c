@@ -1,7 +1,7 @@
 #include "maze.h"
 
 /* Draw the maze */
-void draw_maze(SDL_Instance instance, Player_POV *player, char *map[MAP_WIDTH][MAP_HEIGHT])
+void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     int i;
     int ray_angle;

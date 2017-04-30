@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /* Draw the maze */
-int *cast_ray(int ray_angle, Player_POV *player, char *map[MAP_WIDTH][MAP_HEIGHT])
+int *cast_ray(int ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
 {
     static int coords[2];
     int found_horizontal_coords;
@@ -13,7 +13,7 @@ int *cast_ray(int ray_angle, Player_POV *player, char *map[MAP_WIDTH][MAP_HEIGHT
         printf("Player x: %i\n", player->x_coord);
         printf("Player y: %i\n", player->y_coord);
         printf("Player angle: %i\n", player->angle);
-        printf("char: %s\n", map[0][0]);
+        printf("char: %c\n", map[0][0]);
         printf("ray angle: %i\n", ray_angle);
     } else if (DEBUG) {
         printf("%s\n", "====== CAST_RAY =====");
@@ -25,8 +25,8 @@ int *cast_ray(int ray_angle, Player_POV *player, char *map[MAP_WIDTH][MAP_HEIGHT
     if (!found_horizontal_coords) {
         printf("%s\n", "NO HORIZONTAL COORDS");
     } else {
-        printf("horizontal_coords y: %i\n", horizontal_coords[1]);
         printf("horizontal_coords x: %i\n", horizontal_coords[0]);
+        printf("horizontal_coords y: %i\n", horizontal_coords[1]);
     }
 
     /*
