@@ -21,6 +21,12 @@ int *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     }
 
     raw_distance = find_distance(ray_angle, player, map);
+    if (raw_distance == -1) {
+        printf("find_distance reports no wall\n");
+        coords[0] = 0;
+        coords[1] = 0;
+        return coords;
+    }
     skewed_distance = player->angle - ray_angle;
     printf("distance: %i, skewed_distance: %i\n", raw_distance, skewed_distance);
     col_length = skewed_distance * SCALE_VALUE;

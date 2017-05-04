@@ -23,7 +23,7 @@ typedef struct Coord
 } Coord;
 
 /* Macros: */
-#define TESTING 0
+#define TESTING 1
 #define HIDE_INFO 0
 #define DEBUG 1
 
