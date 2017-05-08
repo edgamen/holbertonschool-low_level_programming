@@ -18,6 +18,8 @@ int check_for_wall(float *coords, float start_x, float start_y, float delta_x, f
                 y > MAP_HEIGHT_BOUND ||
                 x < 0 || y < 0;
             if (beyond_bounds) {
+                printf("MAP_WIDTH_BOUND %f\n", MAP_WIDTH_BOUND);
+                printf("MAP_HEIGHT_BOUND %f\n", MAP_HEIGHT_BOUND);
                 printf("beyond bounds, breaking out of loop\n");
                 break;
             }

@@ -5,10 +5,9 @@ float calculate_distance(Player_POV *player, float *coords) {
     float x_diff;
     float y_diff;
 
-
     x_diff = (player->x_coord - coords[0]);
     y_diff = (player->y_coord - coords[1]);
-    return sqrt(x_diff * x_diff + y_diff * y_diff);
+    return sqrt((x_diff * x_diff) + (y_diff * y_diff));
 }
 
 /* Draw the maze */

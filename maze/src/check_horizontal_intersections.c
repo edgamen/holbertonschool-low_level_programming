@@ -37,28 +37,23 @@ int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
     else if (ray_facing_up)
     {
         start_y = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
-        start_x = player->x_coord + (player->y_coord - start_y)/tan(ray_angle);
+        printf("player->x_coord %f + (player->y_coord %f - start_y %f) %f/tan(DEG_TO_RADIAN %f * ray_angle %f --> %f) %f\n", player->x_coord, player->y_coord, start_y, player->y_coord - start_y, DEG_TO_RADIAN, ray_angle, DEG_TO_RADIAN * ray_angle, tan(DEG_TO_RADIAN * ray_angle));
+        start_x = player->x_coord +
+            (player->y_coord - start_y)/tan(DEG_TO_RADIAN * ray_angle);
     }
     else if (ray_facing_down) {
         start_y = floor(player->y_coord / CUBE_LENGTH)
             * CUBE_LENGTH + CUBE_LENGTH;
-        start_x = player->x_coord + (start_y - player->y_coord)/tan(ray_angle);
+        start_x = player->x_coord +
+            (start_y - player->y_coord)/tan(DEG_TO_RADIAN * ray_angle);
     } else {
         printf("warning! ray_angle %f is over 360 degrees, did not handle the case\n", ray_angle);
         return 0;
     }
 
     delta_y = ray_facing_up ? -CUBE_LENGTH : CUBE_LENGTH;
-    delta_x = ray_vertical ? 0 : CUBE_LENGTH/tan(ray_angle);
-    /* this assumes tangent will not result in appro. -/+ value for agnel
-    if (ray_vertical) {
-        delta_x = 0;
-    } else if (ray_facing_right) {
-        delta_x = CUBE_LENGTH/tan(ray_angle);
-    } else {
-        delta_x = -(CUBE_LENGTH/tan(ray_angle));
-    }
-    */
+    delta_x = ray_vertical ? 0 : CUBE_LENGTH/tan(DEG_TO_RADIAN * ray_angle);
+
     found_wall = check_for_wall(horizontal_coords, start_x, start_y,
         delta_x, delta_y, map);
 

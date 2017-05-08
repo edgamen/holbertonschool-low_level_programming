@@ -2,6 +2,7 @@
 #define MAZE_HEADERS
 
 #include <SDL2/SDL.h>
+#include <math.h>
 
 typedef struct SDL_Instance
 {
@@ -23,7 +24,7 @@ typedef struct Coord
 } Coord;
 
 /* Macros: */
-#define TESTING 1
+#define TESTING 0
 #define HIDE_INFO 0
 #define DEBUG 1
 
@@ -31,18 +32,18 @@ typedef struct Coord
 #define WINDOW_WIDTH 320
 #define WINDOW_HEIGHT 240
 
-#define CUBE_LENGTH 64 /* units */
+#define CUBE_LENGTH 64.0 /* units */
 #define MAP_WIDTH 8
 #define MAP_HEIGHT 9
 #define MAP_WIDTH_BOUND MAP_WIDTH * CUBE_LENGTH
 #define MAP_HEIGHT_BOUND MAP_HEIGHT * CUBE_LENGTH
 
-#define FIELD_OF_VISION 60 /* degrees */
-#define PLAYER_HEIGHT 32 /* units */
+#define FIELD_OF_VISION 60.0 /* degrees */
+#define PLAYER_HEIGHT 32.0 /* units */
 
 #define DEFAULT_START_POS_X 6.5 * CUBE_LENGTH
 #define DEFAULT_START_POS_Y 1.5 * CUBE_LENGTH
-#define DEFAULT_START_ANGLE 30 /* degrees */
+#define DEFAULT_START_ANGLE 30.0 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}
@@ -50,7 +51,7 @@ typedef struct Coord
 #define FLOOR_COLOR {51, 153, 102, 0}
 #define FLOOR_POS {0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2}
 
-
+#define DEG_TO_RADIAN M_PI / 180.0
 #define TAN30 0.57735026919
 #define PROJECTION_PLANE_DISTANCE ( WINDOW_WIDTH / 2 ) / TAN30
 #define SCALE_VALUE CUBE_LENGTH / PROJECTION_PLANE_DISTANCE
