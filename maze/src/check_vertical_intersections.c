@@ -13,7 +13,6 @@ int check_vertical_intersections(float *vertical_coords, float ray_angle,
     int ray_vertical = ray_angle == 90 || ray_angle == 270;
     int ray_facing_right = ray_angle < 90 || ray_angle > 270;
     int ray_facing_left = ray_angle > 90 && ray_angle < 270;
-   int ray_facing_up = ray_angle > 0 && ray_angle < 180;
     int found_wall = 0;
 
     if (HIDE_INFO) {
@@ -37,19 +36,16 @@ int check_vertical_intersections(float *vertical_coords, float ray_angle,
     {
         start_x = floor(player->x_coord / CUBE_LENGTH) * CUBE_LENGTH
             + CUBE_LENGTH;
+        start_y = player->y_coord +
+            (start_x - player->x_coord)*tan(DEG_TO_RADIAN *ray_angle);
     }
     else if (ray_facing_left) {
         start_x = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
+        start_y = player->y_coord +
+            (player->x_coord - start_x)*tan(DEG_TO_RADIAN *ray_angle);
     } else {
         printf("warning! ray_angle %f is over 360 degrees, did not handle the case\n", ray_angle);
         return 0;
-    }
-    if (ray_facing_up) {
-        start_y = player->y_coord +
-            (player->x_coord - start_x)/tan(DEG_TO_RADIAN *ray_angle);
-    } else {
-        start_y = player->y_coord +
-            (start_x - player->x_coord)/tan(DEG_TO_RADIAN *ray_angle);
     }
 
     delta_x = ray_facing_right ? CUBE_LENGTH : -CUBE_LENGTH;
