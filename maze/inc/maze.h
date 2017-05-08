@@ -29,10 +29,10 @@ typedef struct Coord
 #define DEBUG 1
 
 #define WINDOW_TITLE "Maze"
-#define WINDOW_WIDTH 320
-#define WINDOW_HEIGHT 240
+#define WINDOW_WIDTH 320.0
+#define WINDOW_HEIGHT 240.0
 
-#define CUBE_LENGTH 64.0 /* units */
+#define CUBE_LENGTH 90.0 /* units */
 #define MAP_WIDTH 8
 #define MAP_HEIGHT 9
 #define MAP_WIDTH_BOUND MAP_WIDTH * CUBE_LENGTH
@@ -43,7 +43,7 @@ typedef struct Coord
 
 #define DEFAULT_START_POS_X 6.5 * CUBE_LENGTH
 #define DEFAULT_START_POS_Y 1.5 * CUBE_LENGTH
-#define DEFAULT_START_ANGLE 30.0 /* degrees */
+#define DEFAULT_START_ANGLE 70.0 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}

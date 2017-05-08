@@ -31,9 +31,9 @@ float *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         return coords;
     }
     relative_angle = ray_angle - (player->angle - (1/2 * FIELD_OF_VISION));
-    skewed_distance = raw_distance * cos(DEG_TO_RADIAN * ray_angle);
+    skewed_distance = raw_distance * cos(DEG_TO_RADIAN * relative_angle);
     printf("distance: %f, skewed_distance: %f\n", raw_distance, skewed_distance);
-    col_length = raw_distance; /* skewed_distance * SCALE_VALUE; */
+    col_length = skewed_distance * SCALE_VALUE;
     printf("wall slice (column) length: %f\n", col_length);
     coords[0] = WINDOW_HEIGHT / 2 - col_length / 2;
     coords[1] = coords[0] + col_length;
