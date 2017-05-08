@@ -11,7 +11,7 @@ float calculate_distance(Player_POV *player, float *coords) {
 }
 
 /* Draw the maze */
-float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
+float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], Line *line)
 {
     int found_horizontal_coords;
     float horizontal_coords[2] = {5, 4};
@@ -66,8 +66,19 @@ float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
     printf("distance to horizontal coord: %f\n", distance_to_horizontal_coord);
     printf("distance to vertical coord: %f\n", distance_to_vertical_coord);
     if (distance_to_horizontal_coord < distance_to_vertical_coord) {
+        /* probably not exactly the way to determine the direction: */
+        if (ray_angle < 180) {
+            line->direction = 'N';
+        } else if (ray_angle > 180) {
+            line->direction = 'S';
+        }
        return distance_to_horizontal_coord;
     } else {
+        if (ray_angle < 90 || ray_angle > 270) {
+            line->direction = 'E';
+        } else if (ray_angle > 90 && ray_angle < 270) {
+            line->direction = 'W';
+        }
         return distance_to_vertical_coord;
     }
 

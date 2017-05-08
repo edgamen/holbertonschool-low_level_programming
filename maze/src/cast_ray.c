@@ -2,9 +2,8 @@
 #include <stdlib.h>
 
 /* Draw the maze */
-float *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
+void cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], Line *line)
 {
-    static float coords[2];
     float raw_distance;
     float skewed_distance;
     float col_length;
@@ -23,21 +22,21 @@ float *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH])
         printf("map height bound: %f\n", MAP_HEIGHT_BOUND);
     }
 
-    raw_distance = find_distance(ray_angle, player, map);
+    raw_distance = find_distance(ray_angle, player, map, line);
     if (raw_distance == -1) {
         printf("find_distance reports no wall\n");
-        coords[0] = 0;
-        coords[1] = 0;
-        return coords;
+        line->start = 0;
+        line->end = 0;
+        return;
     }
     relative_angle = ray_angle - (player->angle - (1/2 * FIELD_OF_VISION));
     skewed_distance = raw_distance * cos(DEG_TO_RADIAN * relative_angle);
     printf("distance: %f, skewed_distance: %f\n", raw_distance, skewed_distance);
     col_length = skewed_distance * SCALE_VALUE;
     printf("wall slice (column) length: %f\n", col_length);
-    coords[0] = WINDOW_HEIGHT / 2 - col_length / 2;
-    coords[1] = coords[0] + col_length;
+    line->start = WINDOW_HEIGHT / 2 - col_length / 2;
+    line->end = line->start + col_length;
 
     printf("%s\n", "====== CAST_RAY END =====");
-    return coords;
+    return;
 }

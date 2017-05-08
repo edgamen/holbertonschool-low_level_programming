@@ -17,11 +17,12 @@ typedef struct Player_POV
   float angle;
 } Player_POV;
 
-typedef struct Coord
+typedef struct Line
 {
-  float x;
-  float y;
-} Coord;
+  int start;
+  int end;
+  char direction;
+} Line;
 
 /* Macros: */
 #define TESTING 0
@@ -43,13 +44,17 @@ typedef struct Coord
 
 #define DEFAULT_START_POS_X 6.5 * CUBE_LENGTH
 #define DEFAULT_START_POS_Y 1.5 * CUBE_LENGTH
-#define DEFAULT_START_ANGLE 70.0 /* degrees */
+#define DEFAULT_START_ANGLE 45.0 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}
 #define SKY_POS {0, 0, WINDOW_WIDTH, WINDOW_HEIGHT / 2}
 #define FLOOR_COLOR {51, 153, 102, 0}
 #define FLOOR_POS {0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2}
+#define NORTH_COLOR 255, 0, 0, 0
+#define EAST_COLOR 0, 255, 0, 0
+#define SOUTH_COLOR 0, 0, 255, 0
+#define WEST_COLOR 255, 255, 0, 0
 
 #define DEG_TO_RADIAN M_PI / 180.0
 #define TAN30 0.57735026919
@@ -70,11 +75,14 @@ void draw_scene(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH
 void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Draw a rectangle */
 void draw_rectangle(SDL_Instance instance, float positions[], float colors[]);
+/* Set color of line to draw based on direction of wall */
+void set_line_color(SDL_Instance instance, char direction);
 /* Cast ray to determine attributes of column to draw */
-float *cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
+void cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], Line *line);
+/* Find distance to closest wall */
+float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], Line *line);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
-float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH]);
 int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
     Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no vertical intersection of ray and wall, else return 1
