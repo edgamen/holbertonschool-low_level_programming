@@ -33,7 +33,7 @@ typedef struct Line
 #define WINDOW_WIDTH 320.0
 #define WINDOW_HEIGHT 240.0
 
-#define CUBE_LENGTH 90.0 /* units */
+#define CUBE_LENGTH 64.0 /* units */
 #define MAP_WIDTH 8
 #define MAP_HEIGHT 9
 #define MAP_WIDTH_BOUND MAP_WIDTH * CUBE_LENGTH
@@ -42,8 +42,8 @@ typedef struct Line
 #define FIELD_OF_VISION 60.0 /* degrees */
 #define PLAYER_HEIGHT 32.0 /* units */
 
-#define DEFAULT_START_POS_X 6.5 * CUBE_LENGTH
-#define DEFAULT_START_POS_Y 1.5 * CUBE_LENGTH
+#define DEFAULT_START_POS_X 4.5 * CUBE_LENGTH
+#define DEFAULT_START_POS_Y 4.5 * CUBE_LENGTH
 #define DEFAULT_START_ANGLE 45.0 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
@@ -59,7 +59,6 @@ typedef struct Line
 #define DEG_TO_RADIAN M_PI / 180.0
 #define TAN30 0.57735026919
 #define PROJECTION_PLANE_DISTANCE ( WINDOW_WIDTH / 2 ) / TAN30
-#define SCALE_VALUE CUBE_LENGTH / PROJECTION_PLANE_DISTANCE
 
 /* Initialize a new instance of SDL */
 float init_instance(SDL_Instance *);
@@ -80,7 +79,9 @@ void set_line_color(SDL_Instance instance, char direction);
 /* Cast ray to determine attributes of column to draw */
 void cast_ray(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], Line *line);
 /* Find distance to closest wall */
-float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], Line *line);
+float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH], char *horizontal_or_vert);
+/* Find direction of wall being drawn */
+char find_direction(float ray_angle, char horizontal_or_vert);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
 int check_horizontal_intersections(float *horizontal_coords, float ray_angle,

@@ -26,16 +26,6 @@ int check_for_wall(float *coords, float start_x, float start_y, float delta_x, f
              grid_x = x / CUBE_LENGTH;
              grid_y = y / CUBE_LENGTH;
              printf("grid_x: %i, grid_y: %i\n", grid_x, grid_y);
-            /* beyond_bounds =
-                 grid_x > MAP_WIDTH ||
-                 grid_y > MAP_HEIGHT ||
-                 x < 0 || y < 0;
-             if (beyond_bounds) {
-                 printf("MAP_WIDTH_BOUND %f\n", MAP_WIDTH_BOUND);
-                 printf("MAP_HEIGHT_BOUND %f\n", MAP_HEIGHT_BOUND);
-                 printf("beyond bounds, breaking out of loop\n");
-                 break;
-             } */
              printf("map[grid_y][grid_x]: %c\n", map[grid_y][grid_x]);
             if (map[grid_y][grid_x] == 'X') {
                 found_wall = 1;
