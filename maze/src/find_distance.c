@@ -21,14 +21,7 @@ float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH],
     float distance_to_horizontal_coord;
     float distance_to_vertical_coord;
 
-    /* Debugging: */
-    if (HIDE_INFO) {
-        printf("Player x: %f\n", player->x_coord);
-        printf("Player y: %f\n", player->y_coord);
-        printf("Player angle: %f\n", player->angle);
-        printf("char: %c\n", map[0][0]);
-        printf("ray angle: %f\n", ray_angle);
-    } else if (DEBUG) {
+    if (DEBUG) {
         printf("%s\n", "====== FIND_DISTANCE START =====");
     }
 

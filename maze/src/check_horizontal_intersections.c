@@ -13,19 +13,9 @@ int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
     int ray_vertical = ray_angle == 90 || ray_angle == 270;
     int ray_facing_up = ray_angle > 0 && ray_angle < 180;
     int ray_facing_down = ray_angle > 180 && ray_angle < 360;
-    /* float ray_facing_right = (ray_facing_up && ray_angle < 90) ||
-        (ray_facing_down && ray_angle > 270); */
     int found_wall = 0;
 
-    if (HIDE_INFO) {
-        printf("Player x: %f\n", player->x_coord);
-        printf("Player y: %f\n", player->y_coord);
-        printf("Player angle: %f\n", player->angle);
-        printf("ray angle: %f\n", ray_angle);
-        printf("horizontal coords x: %f\n", horizontal_coords[0]);
-        printf("horizontal coords y: %f\n", horizontal_coords[1]);
-        printf("map[0][0] %c\n", map[0][0]);
-    } else if (DEBUG) {
+    if (DEBUG) {
         printf("%s\n", "====== START CHECK_HORIZONTAL_INTERSECTIONS =====");
         printf("ray angle: %f\n", ray_angle);
     }
@@ -36,8 +26,7 @@ int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
     }
     else if (ray_facing_up)
     {
-        start_y = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
-        printf("player->x_coord %f + (player->y_coord %f - start_y %f) %f/tan(DEG_TO_RADIAN %f * ray_angle %f --> %f) %f\n", player->x_coord, player->y_coord, start_y, player->y_coord - start_y, DEG_TO_RADIAN, ray_angle, DEG_TO_RADIAN * ray_angle, tan(DEG_TO_RADIAN * ray_angle));
+        start_y = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - .00001;
         start_x = player->x_coord +
             (player->y_coord - start_y)/tan(DEG_TO_RADIAN * ray_angle);
     }

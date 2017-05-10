@@ -44,7 +44,7 @@ typedef struct Line
 
 #define DEFAULT_START_POS_X 4.5 * CUBE_LENGTH
 #define DEFAULT_START_POS_Y 4.5 * CUBE_LENGTH
-#define DEFAULT_START_ANGLE 45.0 /* degrees */
+#define DEFAULT_START_ANGLE 210.0 /* degrees */
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}

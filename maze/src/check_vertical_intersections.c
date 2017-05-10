@@ -40,7 +40,7 @@ int check_vertical_intersections(float *vertical_coords, float ray_angle,
             (start_x - player->x_coord)*tan(DEG_TO_RADIAN *ray_angle);
     }
     else if (ray_facing_left) {
-        start_x = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - 1;
+        start_x = floor(player->y_coord / CUBE_LENGTH) * CUBE_LENGTH - .00001;;
         start_y = player->y_coord +
             (player->x_coord - start_x)*tan(DEG_TO_RADIAN *ray_angle);
     } else {

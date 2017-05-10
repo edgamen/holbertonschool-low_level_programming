@@ -3,7 +3,7 @@
 /* Draw the maze */
 void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH])
 {
-    float i;
+    int i;
     float ray_angle;
     Line line;
 
@@ -14,6 +14,12 @@ void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]
         printf("player_angle %f\n", player->angle);
         printf("ray_angle (starts with player angle + FOV / 2) %f\n", ray_angle);
         cast_ray(ray_angle, player, map, &line);
+        if (line.direction == 'N') {
+            printf("red line, i = %i\n", i);
+        }
+        if (line.direction == 'W') {
+            printf("yellow line, i = %i\n", i);
+        }
         set_line_color(instance, line.direction);
         printf("start col %i, end col %i\n", line.start, line.end);
         SDL_RenderDrawLine(instance.renderer, i, line.start, i, line.end);

@@ -1,6 +1,9 @@
 #include "maze.h"
 
 char find_direction(float ray_angle, char horizontal_or_vert) {
+    printf("========== FIND_DIRECTION START ==========\n");
+    printf("ray_angle %f, horizontal_or_vert %c \n", ray_angle, horizontal_or_vert);
+
     if (horizontal_or_vert == 'H') {
         if (ray_angle < 180) {
             return 'N';
