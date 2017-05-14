@@ -41,7 +41,7 @@ float init_instance(SDL_Instance *instance)
     }
 
   /* Debugging: */
-  if (DEBUG_LVL1)  {
+  if (DEBUG_DEFAULT)  {
       printf("Addr of instance: %p\n", (void *)instance);
       printf("Addr of window: %p\n", (void *)instance->window);
       printf("Addr of renderer: %p\n", (void *)instance->renderer);

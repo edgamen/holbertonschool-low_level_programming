@@ -27,7 +27,7 @@ typedef struct Line
 /* Macros: */
 #define TESTING 0
 #define HIDE_INFO 0
-#define DEBUG_LVL1 0
+#define DEBUG_DEFAULT 0
 
 #define WINDOW_TITLE "Maze"
 #define WINDOW_WIDTH 320.0
@@ -42,9 +42,9 @@ typedef struct Line
 #define FIELD_OF_VISION 60.0 /* degrees */
 #define PLAYER_HEIGHT 32.0 /* units */
 
-#define DEFAULT_START_POS_X 4.5 * CUBE_LENGTH
-#define DEFAULT_START_POS_Y 4.5 * CUBE_LENGTH
-#define DEFAULT_START_ANGLE 135 /* degrees */
+#define DEFAULT_START_POS_X 4 * CUBE_LENGTH
+#define DEFAULT_START_POS_Y 5 * CUBE_LENGTH
+#define DEFAULT_START_ANGLE 180 /* degrees */
 
 /* number of degrees to rotate per key-press */
 #define ROTATE_SPEED_FACTOR 3
