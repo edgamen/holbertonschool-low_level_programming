@@ -33,7 +33,7 @@ int poll_events(Player_POV *player)
       }
       if (key.keysym.scancode == SDL_SCANCODE_A)
       {
-          move_player(player, player->angle - 90);
+          move_player(player, player->angle + 90);
       }
       if (key.keysym.scancode == SDL_SCANCODE_S)
       {
@@ -41,7 +41,7 @@ int poll_events(Player_POV *player)
       }
       if (key.keysym.scancode == SDL_SCANCODE_D)
       {
-          move_player(player, player->angle + 90);
+          move_player(player, player->angle - 90);
       }
 
 	}

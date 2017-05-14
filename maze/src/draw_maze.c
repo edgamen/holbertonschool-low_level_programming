@@ -7,7 +7,7 @@ void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]
     float ray_angle;
     Line line;
 
-    printf("\n\n\n\n");
+    if (DEBUG_LVL1) printf("\n\n\n\n");
     if (DEBUG_LVL1) printf("%s\n", "====== DRAW_MAZE START =====");
     ray_angle = player->angle + (float)FIELD_OF_VISION / 2;
     for (i = 0; i < WINDOW_WIDTH; i++) {
