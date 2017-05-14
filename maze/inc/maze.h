@@ -28,7 +28,6 @@ typedef struct Line
 #define TESTING 0
 #define HIDE_INFO 0
 #define DEBUG_LVL1 0
-#define DEBUG_MOVE 1
 
 #define WINDOW_TITLE "Maze"
 #define WINDOW_WIDTH 320.0
