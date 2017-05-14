@@ -12,16 +12,18 @@ int main(void)
   map = init_map();
   player = init_player();
   /* Debugging: */
-  printf("Player x: %f\n", player->x_coord);
-  printf("Player y: %f\n", player->y_coord);
-  printf("Player angle: %f\n", player->angle);
+  if (DEBUG_LVL1) {
+      printf("Player x: %f\n", player->x_coord);
+      printf("Player y: %f\n", player->y_coord);
+      printf("Player angle: %f\n", player->angle);
+  }
 
   if (init_instance(&instance) != 0)
     {
       return (1);
     }
 
-    while (poll_events() == 0)
+    while (poll_events(player) == 0)
     {
       SDL_SetRenderDrawColor(instance.renderer, 0, 0, 0, 0);
       SDL_RenderClear(instance.renderer);

@@ -21,7 +21,7 @@ float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH],
     float distance_to_horizontal_coord;
     float distance_to_vertical_coord;
 
-    if (DEBUG) {
+    if (DEBUG_LVL1) {
         printf("%s\n", "====== FIND_DISTANCE START =====");
     }
 
@@ -31,7 +31,7 @@ float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH],
     found_vertical_coords = check_vertical_intersections(vertical_coords,
         ray_angle, player, map);
 
-    if (DEBUG) {
+    if (DEBUG_LVL1) {
         if (!found_horizontal_coords) {
             printf("%s\n", "NO HORIZONTAL COORDS");
         } else {
@@ -58,8 +58,8 @@ float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH],
     distance_to_horizontal_coord =
         calculate_distance(player, horizontal_coords);
     distance_to_vertical_coord = calculate_distance(player, vertical_coords);
-    printf("distance to horizontal coord: %f\n", distance_to_horizontal_coord);
-    printf("distance to vertical coord: %f\n", distance_to_vertical_coord);
+    if (DEBUG_LVL1) printf("distance to horizontal coord: %f\n", distance_to_horizontal_coord);
+    if (DEBUG_LVL1) printf("distance to vertical coord: %f\n", distance_to_vertical_coord);
     if (distance_to_horizontal_coord < distance_to_vertical_coord) {
         *horizontal_or_vert = 'H';
        return distance_to_horizontal_coord;
@@ -68,5 +68,7 @@ float find_distance(float ray_angle, Player_POV *player, char (*map)[MAP_WIDTH],
         return distance_to_vertical_coord;
     }
 
-    printf("%s\n", "====== CAST_RAY END =====");
+    if (DEBUG_LVL1) {
+        printf("%s\n", "====== CAST_RAY END =====");
+    }
 }

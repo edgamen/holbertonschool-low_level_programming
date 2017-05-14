@@ -27,7 +27,7 @@ typedef struct Line
 /* Macros: */
 #define TESTING 0
 #define HIDE_INFO 0
-#define DEBUG 1
+#define DEBUG_LVL1 0
 
 #define WINDOW_TITLE "Maze"
 #define WINDOW_WIDTH 320.0
@@ -45,6 +45,11 @@ typedef struct Line
 #define DEFAULT_START_POS_X 4.5 * CUBE_LENGTH
 #define DEFAULT_START_POS_Y 4.5 * CUBE_LENGTH
 #define DEFAULT_START_ANGLE 210.0 /* degrees */
+
+/* number of degrees to rotate per key-press */
+#define ROTATE_SPEED_FACTOR 3
+/* number of units to move player per key-press */
+#define PLAYER_MOVE 10
 
 /* note: can use SDL_COLOR in the future */
 #define SKY_COLOR {102, 194, 255, 0}
@@ -67,7 +72,7 @@ char (*init_map(void))[MAP_WIDTH];
 /* Return pointer to player instance */
 Player_POV *init_player(void);
 /* Check SDL queue of events for handling */
-float poll_events(void);
+int poll_events(Player_POV *player);
 /* Draw what will be presented on window */
 void draw_scene(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Draw the maze */
@@ -95,5 +100,6 @@ int check_for_wall(float *coords, float start_x, float start_y, float delta_x,
     float delta_y, char (*map)[MAP_WIDTH]);
 /* Perform clean-up tasks related to SDL before quitting*/
 void clean_up_SDL(SDL_Instance *instance);
+void move_player(Player_POV *player, float angle);
 
 #endif

@@ -23,7 +23,7 @@ int check_vertical_intersections(float *vertical_coords, float ray_angle,
         printf("horizontal coords x: %f\n", vertical_coords[0]);
         printf("horizontal coords y: %f\n", vertical_coords[1]);
         printf("map[0][0] %c\n", map[0][0]);
-    } else if (DEBUG) {
+    } else if (DEBUG_LVL1) {
         printf("%s\n", "====== START CHECK_VERTICAL_INTERSECTIONS =====");
         printf("ray angle: %f\n", ray_angle);
     }
@@ -44,7 +44,7 @@ int check_vertical_intersections(float *vertical_coords, float ray_angle,
         start_y = player->y_coord +
             (player->x_coord - start_x)*tan(DEG_TO_RADIAN *ray_angle);
     } else {
-        printf("warning! ray_angle %f is over 360 degrees, did not handle the case\n", ray_angle);
+        if (DEBUG_LVL1) printf("warning! ray_angle %f is over 360 degrees, did not handle the case\n", ray_angle);
         return 0;
     }
 
@@ -54,7 +54,7 @@ int check_vertical_intersections(float *vertical_coords, float ray_angle,
     found_wall = check_for_wall(vertical_coords, start_x, start_y,
         delta_x, delta_y, map);
 
-    printf("====== END CHECK_VERTICAL_INTERSECTIONS; found_wall = %i, x %f, y %f ===== \n",
+    if (DEBUG_LVL1) printf("====== END CHECK_VERTICAL_INTERSECTIONS; found_wall = %i, x %f, y %f ===== \n",
     found_wall, vertical_coords[0], vertical_coords[1]);
     return found_wall;
 }
