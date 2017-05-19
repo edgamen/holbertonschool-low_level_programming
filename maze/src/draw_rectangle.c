@@ -6,7 +6,7 @@
  * @positions: array of values for rectangle
  * @colors: array of RGBA values for rectangle color
  */
-void draw_rectangle(SDL_Instance sdl_instance, float positions[], float
+void draw_rectangle(SDL_Instance sdl_instance, float positions[], int
 	colors[])
 {
 	SDL_Rect rectangle;
