@@ -14,11 +14,8 @@ void draw_maze(SDL_Instance instance, Player_POV *player, char (*map)[MAP_WIDTH]
         if (DEBUG_DEFAULT) printf("player_angle %f\n", player->angle);
         if (DEBUG_DEFAULT) printf("ray_angle (starts with player angle + FOV / 2) %f\n", ray_angle);
         cast_ray(ray_angle, player, map, &line);
-        if (line.direction == 'N') {
-            if (DEBUG_DEFAULT) printf("red line, i = %i\n", i);
-        }
-        if (line.direction == 'W') {
-            if (DEBUG_DEFAULT) printf("yellow line, i = %i\n", i);
+        if (line.direction != 'W') {
+            if (DEBUG_WALLBUG) printf("encountered bug, i = %i\n", i);
         }
         set_line_color(instance, line.direction);
         if (DEBUG_DEFAULT) printf("start col %i, end col %i\n", line.start, line.end);

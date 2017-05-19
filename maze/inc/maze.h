@@ -25,9 +25,10 @@ typedef struct Line
 } Line;
 
 /* Macros: */
-#define TESTING 0
+#define TESTING 1
 #define HIDE_INFO 0
-#define DEBUG_DEFAULT 0
+#define DEBUG_DEFAULT 1
+#define DEBUG_WALLBUG 1
 
 #define WINDOW_TITLE "Maze"
 #define WINDOW_WIDTH 320.0
