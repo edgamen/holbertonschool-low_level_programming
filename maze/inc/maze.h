@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <math.h>
+#include <stdlib.h>
 
 typedef struct SDL_Instance
 {
@@ -23,12 +24,6 @@ typedef struct Line
   int end;
   char direction;
 } Line;
-
-/* Macros: */
-#define TESTING 1
-#define HIDE_INFO 0
-#define DEBUG_DEFAULT 1
-#define DEBUG_WALLBUG 1
 
 #define WINDOW_TITLE "Maze"
 #define WINDOW_WIDTH 320.0
@@ -67,7 +62,7 @@ typedef struct Line
 #define PROJECTION_PLANE_DISTANCE ( WINDOW_WIDTH / 2 ) / TAN30
 
 /* Initialize a new instance of SDL */
-float init_instance(SDL_Instance *);
+int init_instance(SDL_Instance *);
 /* Initialize map data and return map array */
 char (*init_map(void))[MAP_WIDTH];
 /* Return pointer to player instance */
@@ -91,16 +86,17 @@ char find_direction(float ray_angle, char horizontal_or_vert);
 /* Return 0 if no horizontal intersection of ray and wall, else return 1
 and set value of horizontal_coords to the closest intersection */
 int check_horizontal_intersections(float *horizontal_coords, float ray_angle,
-    Player_POV *player, char (*map)[MAP_WIDTH]);
+	Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Return 0 if no vertical intersection of ray and wall, else return 1
 and set value of vertical_coords to the closest intersection */
 int check_vertical_intersections(float *vertical_coords, float ray_angle,
-    Player_POV *player, char (*map)[MAP_WIDTH]);
+	Player_POV *player, char (*map)[MAP_WIDTH]);
 /* Helper function to check for points along the ray for walls */
 int check_for_wall(float *coords, float start_x, float start_y, float delta_x,
-    float delta_y, char (*map)[MAP_WIDTH]);
+	float delta_y, char (*map)[MAP_WIDTH]);
 /* Perform clean-up tasks related to SDL before quitting*/
 void clean_up_SDL(SDL_Instance *instance);
+/* Move the player in the specified direction (angle) */
 void move_player(Player_POV *player, float angle);
 
 #endif
